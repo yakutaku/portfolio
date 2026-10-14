@@ -15,7 +15,6 @@ import {
   int,
   ivec2,
   length,
-  max,
   min,
   mix,
   mod,
@@ -53,7 +52,7 @@ export interface PixelCity {
   readonly backend: 'webgpu' | 'webgl2';
   setCitySize(value: number): void;
   setNight(value: number): void;
-  /** 0–1 audio energy; brightens windows and stirs the water. */
+  /** 0–1 audio energy, smoothed internally; gently brightens lit windows and stirs the water. */
   setEnergy(value: number): void;
   dispose(): void;
 }
@@ -120,9 +119,15 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
     const base = texel.rgb;
     const cls = round(texel.a.mul(255 / CLASS_STEP));
 
-    // Night arrives in 4 dithered steps so the palette stays pixel-art, not a smooth fade.
-    const dither = mod(gx, 2).mul(2).add(mod(gy, 2)).div(4);
-    const nq = floor(clamp(night.mul(4).add(dither), 0, 4)).div(4);
+    // Night arrives in 8 steps, each spread across a 4×4 ordered-dither pattern,
+    // so dusk sweeps across the skyline pixel by pixel instead of jumping.
+    const bayer2 = (x: any, y: any) => {
+      const a = mod(x, 2);
+      const b = mod(y, 2);
+      return a.add(b).sub(a.mul(b).mul(2)).mul(2).add(b); // [[0,2],[3,1]]
+    };
+    const bayer = bayer2(gx, gy).mul(4).add(bayer2(floor(gx.div(2)), floor(gy.div(2)))).div(16);
+    const nq = floor(clamp(night.mul(8).add(bayer), 0, 8)).div(8);
 
     const skyNight = mix(col('#26244F'), col('#5B4F91'), gy.div(HORIZON));
     const star = step(0.996, hash(gx.add(gy.mul(1013)))).mul(step(gy, HORIZON * 0.6)).mul(night);
@@ -143,10 +148,11 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
     const pink = mix(base, base.mul(vec3(0.5, 0.42, 0.6)), nq);
     const horizon = mix(base, col('#6F64AA'), nq);
 
-    const glow = col('#FFE48C').mul(uEnergy.mul(0.6).add(1));
-    const windowLit = mix(base, glow, max(nq, uEnergy.mul(0.5)));
+    // Audio only nudges lit windows a little brighter; it never switches windows on or off.
+    const glow = col('#FFE48C').mul(uEnergy.mul(0.12).add(1));
+    const windowLit = mix(base.mul(uEnergy.mul(0.08).add(1)), glow, nq);
     const dark = mix(col('#564D97'), col('#2F2A5E'), nq);
-    const on = step(texel.r, night.mul(1.1).sub(0.12).add(uEnergy.mul(0.35)));
+    const on = step(texel.r, night.mul(1.1).sub(0.12));
     const windowDusk = mix(dark, glow, on);
 
     return select(cls.equal(Cls.Sky), sky,
@@ -180,11 +186,11 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
         const d = length(vec2(gx.sub(r.x), gy.sub(r.y).mul(2.2)));
         const front = age.mul(18);
         const ahead = float(1).sub(smoothstep(front.sub(2), front.add(6), d));
-        const wave = sin(d.mul(0.8).sub(age.mul(7))).mul(exp(age.mul(-1.4))).mul(ahead).mul(step(0, age));
+        const wave = sin(d.mul(0.8).sub(age.mul(7))).mul(exp(age.mul(-1.1))).mul(ahead).mul(step(0, age));
         rip.addAssign(wave.mul(r.w));
       }
 
-      const sway = sin(gy.mul(1.7).add(uTime.mul(2.2))).mul(depth.mul(1.8).add(1.2)).mul(uEnergy.mul(0.8).add(1));
+      const sway = sin(gy.mul(1.7).add(uTime.mul(2.2))).mul(depth.mul(1.8).add(1.2)).mul(uEnergy.mul(0.5).add(1));
       const dx = round(sway.add(rip.mul(3)));
       const srcX = clamp(gx.add(dx), 0, uGridW.sub(1));
       const srcY = clamp(float(HORIZON - 2).sub(floor(k.mul(1.25).add(rip.mul(1.5)))), 0, HORIZON - 1);
@@ -193,7 +199,14 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
       const water = mix(col('#8D86CC'), col('#2B285C'), uNight);
       const band = step(mod(gy.add(floor(uTime.mul(4))), 3), 0.5);
       const tint = min(depth.mul(0.45).add(0.3).add(band.mul(0.18)), 0.85);
-      const surface = mix(reflected, water, tint);
+      const tinted = mix(reflected, water, tint);
+
+      // Ripple crests catch the light and troughs fall into shade, so rings show
+      // even where the reflection is flat sky (displacement alone is invisible there).
+      const crest = step(0.4, rip);
+      const trough = step(0.4, rip.negate());
+      const highlight = mix(col('#DCD5F7'), col('#8A82C6'), uNight);
+      const surface = mix(mix(tinted, highlight, crest.mul(0.6)), water.mul(0.72), trough.mul(0.4));
 
       // Sun glint: a sparkling column that narrows towards the viewer and fades at night.
       const halfWidth = uSunR.mul(0.9).sub(k.mul(0.55));
@@ -228,6 +241,7 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
   let nextRipple = 0;
   let lastRippleAt = { x: -99, y: -99, t: 0 };
   let disposed = false;
+  let energyTarget = 0;
 
   const redraw = () => {
     drawCity(pixels, MAX_GRID_WIDTH, layout, citySize);
@@ -274,16 +288,17 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
     const rect = canvas.getBoundingClientRect();
     const x = ((clientX - rect.left) / rect.width) * gridW;
     const y = ((clientY - rect.top) / rect.height) * GRID_HEIGHT;
-    if (y < HORIZON + 1) return;
+    if (y < 0 || y > GRID_HEIGHT) return;
+    const waterY = Math.max(y, HORIZON + 4); // taps on the city ripple the water just below it
     const now = uTime.value;
-    const moved = Math.hypot(x - lastRippleAt.x, y - lastRippleAt.y);
+    const moved = Math.hypot(x - lastRippleAt.x, waterY - lastRippleAt.y);
     if (strength < 1 && (now - lastRippleAt.t < 0.09 || moved < 3)) return;
-    lastRippleAt = { x, y, t: now };
-    rippleData[nextRipple].set(x, y, now, strength);
+    lastRippleAt = { x, y: waterY, t: now };
+    rippleData[nextRipple].set(x, waterY, now, strength);
     nextRipple = (nextRipple + 1) % RIPPLE_COUNT;
   };
   const onPointerMove = (e: PointerEvent) => addRipple(e.clientX, e.clientY, 0.45);
-  const onPointerDown = (e: PointerEvent) => addRipple(e.clientX, e.clientY, 1);
+  const onPointerDown = (e: PointerEvent) => addRipple(e.clientX, e.clientY, 1.6);
   canvas.addEventListener('pointermove', onPointerMove);
   canvas.addEventListener('pointerdown', onPointerDown);
 
@@ -292,6 +307,9 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
     const dt = lastFrame ? Math.min((ms - lastFrame) / 1000, 0.1) : 0;
     lastFrame = ms;
     uTime.value += dt;
+    // Smooth the audio input: quick attack, slow release, so beats swell instead of flash.
+    const tau = energyTarget > uEnergy.value ? 0.06 : 0.45;
+    uEnergy.value += (energyTarget - uEnergy.value) * (1 - Math.exp(-dt / tau));
     render();
   };
   const updateRunning = () => {
@@ -339,7 +357,7 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
       if (!running) render();
     },
     setEnergy(value) {
-      uEnergy.value = Math.min(1, Math.max(0, value));
+      energyTarget = reducedMotion ? 0 : Math.min(1, Math.max(0, value));
     },
     dispose() {
       if (disposed) return;
