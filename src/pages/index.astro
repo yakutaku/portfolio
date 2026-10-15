@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+import PixelCity from '../components/PixelCity.astro';
+import WorkCover from '../components/WorkCover.astro';
+import { site } from '../site';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const { home } = site;
+---
+
+<Base>
+  <PixelCity id="hero-city" height="clamp(280px, 40vw, 600px)" scrollNight hint={home.interactionHint} />
+  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <div class="container">
+    <section class="intro" aria-labelledby="name">
+      <h1 id="name" class="name">{site.name}</h1>
+      <div class="intro-row">
+        <p class="headline">{home.headline}</p>
+        <p class="lede weak">{home.intro}</p>
+      </div>
+    </section>
+
+    <section class="work" aria-labelledby="work-heading">
+      <h2 id="work-heading" class="section-heading">Selected work</h2>
+      <ul class="work-list">
+        {
+          work.map((item, i) => (
+            <li>
+              <a class="work-row" href={`/work/${item.id}`}>
+                <WorkCover cover={item.data.cover} alt={item.data.coverAlt} tint={item.data.tint} eager={i === 0}>
+                  {item.data.tag && <span class="tag cover-tag">{item.data.tag}</span>}
+                </WorkCover>
+                <div class="work-text">
+                  <span class="meta weak">{item.data.years} · {item.data.role}</span>
+                  <h3>{item.data.title}</h3>
+                  <p class="weak">{item.data.summary}</p>
+                  <span class="read">{home.readLabel}<span class="visually-hidden">: {item.data.title}</span></span>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="outside split" aria-labelledby="outside-heading">
+      <h2 id="outside-heading" class="split-heading">{home.outsideWork.heading}</h2>
+      <div class="split-body">
+        <p class="weak">{home.outsideWork.body}</p>
+        <div class="links">
+          <a href={site.links.spotify}>{home.outsideWork.spotifyLabel}</a>
+          <a href={site.links.gumroad}>{home.outsideWork.gumroadLabel}</a>
+        </div>
+      </div>
+    </section>
+
+    <Contact />
+  </div>
+</Base>
+
+<style>
+  .intro { padding-block: var(--xl) var(--xxl); }
+  .name {
+    font-size: clamp(56px, 12vw, 176px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+  .intro-row { display: flex; flex-wrap: wrap; gap: var(--m) var(--l); margin-top: var(--xl); }
+  .headline {
+    flex: 1 1 440px;
+    max-width: 640px;
+    font-size: clamp(26px, 3vw, 37px);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .lede { flex: 1 1 440px; max-width: 600px; font-size: var(--text-lg); line-height: var(--lh-lg); }
+
+  .section-heading { font-size: var(--text-xl); line-height: var(--lh-xl); margin-bottom: var(--m); }
+  .work { padding-bottom: var(--xxl); }
+  .work-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--stroke-weak); }
+  .work-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--m) var(--l);
+    padding-block: var(--l);
+    border-top: 1px solid var(--stroke-weak);
+    color: var(--text-strong);
+    text-decoration: none;
+  }
+  .work-row:hover { color: var(--text-strong); }
+  .work-row > :global(.cover) {
+    flex: 1 1 360px;
+    max-width: 560px;
+    transition: transform 200ms ease-out;
+  }
+  .work-row:hover > :global(.cover) { transform: translateY(-4px); }
+  @media (prefers-reduced-motion: reduce) {
+    .work-row > :global(.cover) { transition: none; }
+    .work-row:hover > :global(.cover) { transform: none; }
+  }
+  .cover-tag { position: absolute; left: var(--s); top: var(--s); }
+  .work-text { flex: 1 1 360px; display: flex; flex-direction: column; gap: var(--xs); }
+  .meta { font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .work-text h3 { font-size: clamp(22px, 2.4vw, 31px); line-height: 1.3; letter-spacing: -0.01em; }
+  .read { margin-top: var(--xs); color: var(--brand); text-decoration: underline; text-underline-offset: 4px; }
+  .work-row:hover .read { color: var(--brand-hover); text-decoration-thickness: 2px; }
+
+  .outside { padding-bottom: var(--xxl); }
+  .links { display: flex; flex-wrap: wrap; gap: 0 var(--m); margin-top: var(--xs); }
+  .links a { display: inline-flex; align-items: center; min-height: var(--target); }
+</style>

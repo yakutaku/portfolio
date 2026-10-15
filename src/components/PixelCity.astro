@@ -1,0 +1,118 @@
+---
+// The poster image paints immediately; the live WebGPU/WebGL2 scene loads once
+// the page is idle and fades in on top. If the scene can't start, the poster stays.
+interface Props {
+  id: string;
+  height: string; // any CSS height, e.g. 'clamp(280px, 40vw, 600px)'
+  citySize?: number;
+  /** Darken towards night as the element scrolls up out of view. */
+  scrollNight?: boolean;
+  hint?: string;
+  label?: string;
+}
+const { id, height, citySize = 0.5, scrollNight = false, hint, label } = Astro.props;
+---
+
+<div
+  class="city"
+  id={id}
+  data-pixel-city
+  data-city-size={citySize}
+  data-scroll-night={scrollNight ? '' : undefined}
+  style={`--city-height: ${height}`}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+>
+  <img class="poster" src="/city-poster.png" alt="" width="384" height="140" decoding="async" fetchpriority="high" />
+  {hint && <span class="hint" aria-hidden="true">{hint}</span>}
+</div>
+
+<script>
+  import type { PixelCity } from '../lib/pixel-city/scene';
+
+  type CityElement = HTMLElement & { pixelCity?: Promise<PixelCity | null> };
+
+  const canRun = () => {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    return !connection?.saveData;
+  };
+
+  const whenIdle = (fn: () => void) =>
+    'requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 200);
+
+  function start(el: CityElement) {
+    el.pixelCity = new Promise((resolve) => {
+      whenIdle(async () => {
+        if (!canRun()) return resolve(null);
+        try {
+          const { createPixelCity } = await import('../lib/pixel-city/scene');
+          const city = await createPixelCity(el, { citySize: Number(el.dataset.citySize) });
+          el.classList.add('is-live');
+          el.dataset.backend = city.backend;
+          if (el.hasAttribute('data-scroll-night')) bindScrollNight(el, city);
+          resolve(city);
+        } catch (error) {
+          console.warn('Pixel city unavailable, keeping the poster.', error);
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  function bindScrollNight(el: HTMLElement, city: PixelCity) {
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const rect = el.getBoundingClientRect();
+      // 0 while the hero is fully on screen, 1 once 70% of it has scrolled away.
+      city.setNight(Math.min(1, Math.max(0, -rect.top / (rect.height * 0.7))));
+    };
+    addEventListener('scroll', () => {
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(update);
+      }
+    }, { passive: true });
+    update();
+  }
+
+  for (const el of document.querySelectorAll<CityElement>('[data-pixel-city]')) start(el);
+</script>
+
+<style>
+  .city {
+    position: relative;
+    overflow: hidden;
+    height: var(--city-height);
+    background: var(--sky);
+  }
+  .poster {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center bottom;
+    image-rendering: pixelated;
+  }
+  .city :global(canvas) {
+    opacity: 0;
+    transition: opacity 600ms ease-out;
+  }
+  .city.is-live :global(canvas) { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .city :global(canvas) { transition: none; }
+  }
+  .hint {
+    position: absolute;
+    z-index: 1;
+    right: var(--gutter);
+    bottom: var(--m);
+    padding: var(--xs) var(--s);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text-strong);
+    font-size: var(--text-sm);
+    line-height: var(--lh-sm);
+    pointer-events: none;
+  }
+</style>

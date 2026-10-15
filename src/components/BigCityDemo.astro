@@ -1,0 +1,202 @@
+---
+import PixelCity from './PixelCity.astro';
+import { site } from '../site';
+
+const { heading, body, audio } = site.bigcityDemo;
+const hasAudio = audio.length > 0;
+---
+
+<section class="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-labelledby="demo-heading">
+  <div class="demo-text">
+    <span class="tag">Interactive demo</span>
+    <h2 id="demo-heading">{heading}</h2>
+    <p class="weak">{body}</p>
+  </div>
+
+  <div class="panel">
+    <PixelCity id="demo-city" height="clamp(240px, 32vw, 340px)" label="Pixel skyline that grows with City size" />
+
+    <div class="controls">
+      {
+        hasAudio && (
+          <button class="btn btn-primary play" type="button" aria-pressed="false" data-play>
+            <svg class="icon-play" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M6 4l10 6-10 6z" />
+            </svg>
+            <svg class="icon-pause" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <rect x="5" y="4" width="3.5" height="12" rx="1" />
+              <rect x="11.5" y="4" width="3.5" height="12" rx="1" />
+            </svg>
+            <span data-play-label>Play demo</span>
+          </button>
+        )
+      }
+
+      <div class="knob-row">
+        <div class="knob" aria-hidden="true">
+          <div class="knob-face" data-knob><span class="knob-mark"></span></div>
+        </div>
+        <div class="slider">
+          <label for="city-size">
+            <span>City size</span>
+            <output for="city-size" data-readout>50.0%</output>
+          </label>
+          <input id="city-size" type="range" min="0" max="100" step="0.5" value="50" data-size />
+        </div>
+      </div>
+    </div>
+
+    {
+      hasAudio && (
+        <p class="note weak">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 13v-3a7 7 0 0 1 14 0v3" />
+            <rect x="2.5" y="12" width="4" height="6" rx="1.5" />
+            <rect x="13.5" y="12" width="4" height="6" rx="1.5" />
+          </svg>
+          Best with headphones.
+        </p>
+      )
+    }
+    <p class="error" role="alert" data-error hidden></p>
+  </div>
+</section>
+
+<script>
+  import { BigCityPlayer } from '../lib/bigcity-player';
+  import type { PixelCity } from '../lib/pixel-city/scene';
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-bigcity-demo]')) {
+    const urls: string[] = JSON.parse(root.dataset.audio ?? '[]');
+    const player = urls.length ? new BigCityPlayer(urls) : null;
+    const cityEl = root.querySelector<HTMLElement & { pixelCity?: Promise<PixelCity | null> }>('[data-pixel-city]')!;
+    const size = root.querySelector<HTMLInputElement>('[data-size]')!;
+    const readout = root.querySelector<HTMLOutputElement>('[data-readout]')!;
+    const knob = root.querySelector<HTMLElement>('[data-knob]')!;
+    const play = root.querySelector<HTMLButtonElement>('[data-play]');
+    const playLabel = root.querySelector<HTMLElement>('[data-play-label]');
+    const error = root.querySelector<HTMLElement>('[data-error]')!;
+    let city: PixelCity | null = null;
+    let frame = 0;
+
+    const applySize = () => {
+      const value = size.valueAsNumber / 100;
+      readout.textContent = `${size.valueAsNumber.toFixed(1)}%`;
+      knob.style.setProperty('--angle', `${-135 + value * 270}deg`);
+      player?.setSize(value);
+      city?.setCitySize(value);
+    };
+    size.addEventListener('input', applySize);
+    applySize();
+
+    // The city starts lazily; hook it up whenever it's ready.
+    const waitForCity = () => {
+      if (!cityEl.pixelCity) return requestAnimationFrame(waitForCity);
+      cityEl.pixelCity.then((c) => {
+        city = c;
+        applySize();
+      });
+    };
+    waitForCity();
+
+    const pumpEnergy = () => {
+      city?.setEnergy(player?.energy() ?? 0);
+      frame = requestAnimationFrame(pumpEnergy);
+    };
+
+    const setPlaying = (on: boolean) => {
+      play!.setAttribute('aria-pressed', String(on));
+      playLabel!.textContent = on ? 'Pause demo' : 'Play demo';
+      cancelAnimationFrame(frame);
+      if (on) pumpEnergy();
+      else city?.setEnergy(0);
+    };
+
+    play?.addEventListener('click', async () => {
+      if (!player) return;
+      error.hidden = true;
+      if (player.playing) {
+        await player.pause();
+        return setPlaying(false);
+      }
+      playLabel!.textContent = 'Loading…';
+      try {
+        await player.play();
+        player.setSize(size.valueAsNumber / 100);
+        setPlaying(true);
+      } catch (e) {
+        console.error(e);
+        setPlaying(false);
+        error.textContent = "The demo audio didn't load. Check your connection and try again.";
+        error.hidden = false;
+      }
+    });
+
+    // Stop the music when the reader leaves the tab.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && player?.playing) {
+        void player.pause();
+        setPlaying(false);
+      }
+    });
+  }
+</script>
+
+<style>
+  .demo { display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
+  .demo-text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--xs); }
+  .demo h2 { margin: 0; font-size: var(--text-2xl); line-height: var(--lh-2xl); }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m);
+    padding: var(--s);
+    border: 1px solid var(--stroke-weak);
+    border-radius: var(--radius-l);
+    background: #fff;
+  }
+  .panel :global(.city) { border-radius: var(--radius-m); }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--m); }
+  .play .icon-pause, .play[aria-pressed='true'] .icon-play { display: none; }
+  .play[aria-pressed='true'] .icon-pause { display: block; }
+  @media (max-width: 599px) { .play { width: 100%; order: 2; } }
+
+  .knob-row { flex: 1 1 280px; display: flex; align-items: center; gap: var(--s); }
+  .knob {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+    border-radius: 50%;
+    background: conic-gradient(from 225deg, var(--stripe-1), var(--stripe-2) 25%, var(--lemon) 45%, var(--stripe-3) 75%, transparent 75%);
+  }
+  .knob-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #f6f1e4;
+    box-shadow: inset 0 -3px 0 rgb(0 0 0 / 0.12), 0 2px 4px rgb(0 0 0 / 0.15);
+    transform: rotate(var(--angle, 0deg));
+    transition: transform 80ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) { .knob-face { transition: none; } }
+  .knob-mark {
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    width: 4px;
+    height: 16px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: var(--text-strong);
+  }
+  .slider { flex: 1; min-width: 0; }
+  .slider label { display: flex; justify-content: space-between; font-weight: 700; }
+  output { font-variant-numeric: tabular-nums; }
+  input[type='range'] { width: 100%; height: var(--target); margin: 0; accent-color: var(--brand); cursor: pointer; }
+
+  .note { display: flex; align-items: center; gap: var(--xs); font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .note svg { flex: none; }
+  .error { color: #b42318; font-size: var(--text-sm); line-height: var(--lh-sm); }
+</style>

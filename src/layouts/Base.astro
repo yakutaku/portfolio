@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import { nav, site } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = site.description, image = '/og.png' } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.title}`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) =>
+  href === '/' ? path === '/' || path.startsWith('/work') : !href.includes('#') && path === href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FBFAF7" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site ?? Astro.url)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="container site-header">
+      <a class="brand" href="/">
+        <span class="brand-name">{site.name}</span>
+        <span class="weak">{site.title}</span>
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="container site-footer weak">© {new Date().getFullYear()} {site.name}</footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--xs) var(--s);
+    padding-block: var(--m);
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-strong);
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--text-strong); }
+  .brand-name { font-weight: 700; }
+  .brand .weak { font-size: var(--text-sm); line-height: var(--lh-sm); }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 -12px;
+    padding: 0;
+    list-style: none;
+  }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target);
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--text-strong);
+    text-decoration: none;
+  }
+  nav a:hover { background: var(--fill-hover); color: var(--text-strong); }
+  nav a:active { background: var(--fill-press); }
+  nav a[aria-current='page'] { font-weight: 700; background: var(--fill); }
+  @media (min-width: 600px) {
+    nav ul { margin: 0; gap: var(--xs); }
+    nav a { padding: 0 var(--s); }
+  }
+  .site-footer {
+    padding-block: var(--l) var(--xl);
+    border-top: 1px solid var(--stroke-weak);
+    font-size: var(--text-sm);
+    line-height: var(--lh-sm);
+  }
+</style>

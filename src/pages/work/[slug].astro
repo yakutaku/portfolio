@@ -1,0 +1,186 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BigCityDemo from '../../components/BigCityDemo.astro';
+import WorkCover from '../../components/WorkCover.astro';
+
+export async function getStaticPaths() {
+  const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return work.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: work[(i + 1) % work.length] },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const sections = headings.filter((h) => h.depth === 2);
+const d = entry.data;
+---
+
+<Base title={d.title} description={d.summary} image={d.cover}>
+  <article class="container">
+    <a class="back" href="/#work-heading">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M16 10H4M9 5l-5 5 5 5"></path>
+      </svg>
+      Back to work
+    </a>
+
+    <header class="head">
+      <h1>{d.title}</h1>
+      <p class="summary weak">{d.summary}</p>
+    </header>
+
+    <dl class="facts">
+      <div><dt class="weak">Role</dt><dd>{d.role}</dd></div>
+      <div><dt class="weak">Timeline</dt><dd>{d.years}</dd></div>
+      <div><dt class="weak">Team</dt><dd>{d.team}</dd></div>
+      <div><dt class="weak">Outcome</dt><dd>{d.outcome}</dd></div>
+    </dl>
+
+    <WorkCover cover={d.cover} alt={d.coverAlt} tint={d.tint} ratio="16 / 9" eager />
+
+    <div class="body">
+      {
+        sections.length > 1 && (
+          <nav class="toc" aria-label="On this page">
+            <p class="weak">On this page</p>
+            <ul>
+              {sections.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+      <div class="prose" data-prose>
+        <Content />
+      </div>
+    </div>
+
+    {d.demo && (
+      <div id="demo-holder" hidden>
+        <BigCityDemo />
+      </div>
+    )}
+
+    <a class="next" href={`/work/${next.id}`}>
+      <span class="next-text">
+        <span class="weak">Next case study</span>
+        <span class="next-title">{next.data.title}</span>
+      </span>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M8 20h24M22 10l10 10-10 10"></path>
+      </svg>
+    </a>
+  </article>
+</Base>
+
+<script>
+  // Put the demo where the Markdown asks for it with <div data-demo></div>.
+  // The node is moved, not cloned, so listeners the demo already attached come with it.
+  const demo = document.getElementById('demo-holder')?.firstElementChild;
+  const slot = document.querySelector('[data-prose] [data-demo]');
+  if (demo && slot) slot.replaceWith(demo);
+
+  // Highlight the section being read in the table of contents.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('.toc a')].map((a) => [a.hash.slice(1), a]),
+  );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        for (const a of links.values()) a.removeAttribute('aria-current');
+        links.get(entry.target.id)?.setAttribute('aria-current', 'true');
+      }
+    },
+    { rootMargin: '0px 0px -70% 0px' },
+  );
+  for (const id of links.keys()) {
+    const heading = document.getElementById(id);
+    if (heading) observer.observe(heading);
+  }
+</script>
+
+<style>
+  .back { display: inline-flex; align-items: center; gap: var(--xs); min-height: var(--target); margin-top: var(--l); }
+  .head { display: flex; flex-direction: column; gap: var(--m); padding-block: var(--l) var(--xl); max-width: 880px; }
+  h1 { font-size: clamp(37px, 4.2vw, 54px); line-height: 1.18; letter-spacing: -0.025em; }
+  .summary { max-width: 720px; font-size: var(--text-lg); line-height: var(--lh-lg); }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--m) var(--l);
+    margin-bottom: var(--xl);
+    padding-block: var(--m);
+    border-block: 1px solid var(--stroke-weak);
+  }
+  dt { font-size: var(--text-sm); line-height: var(--lh-sm); }
+  dd { font-weight: 700; }
+
+  .body { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--xl) var(--xxl); padding-block: var(--xxl); }
+  .toc { flex: 0 1 220px; display: none; }
+  @media (min-width: 1000px) {
+    .toc { display: block; position: sticky; top: var(--m); }
+  }
+  .toc p { font-size: var(--text-sm); line-height: var(--lh-sm); margin-bottom: var(--xs); }
+  .toc ul { list-style: none; margin: 0 0 0 -12px; padding: 0; }
+  .toc a {
+    display: flex;
+    align-items: center;
+    min-height: var(--target);
+    padding: 0 12px;
+    border-radius: 10px;
+    color: var(--text-weak);
+    text-decoration: none;
+  }
+  .toc a:hover { background: var(--fill-hover); color: var(--text-strong); }
+  .toc a[aria-current] { color: var(--text-strong); font-weight: 700; }
+
+  .prose { flex: 1 1 560px; max-width: 720px; min-width: 0; }
+  .prose :global(h2) {
+    font-size: var(--text-2xl);
+    line-height: var(--lh-2xl);
+    letter-spacing: -0.01em;
+    margin: var(--xxl) 0 var(--s);
+    scroll-margin-top: var(--m);
+  }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(h3) { font-size: var(--text-xl); line-height: var(--lh-xl); margin: var(--xl) 0 var(--xs); }
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) { margin: 0 0 var(--s); }
+  .prose :global(li + li) { margin-top: var(--xs); }
+  .prose :global(img) { border-radius: var(--radius-m); margin-block: var(--m) var(--xs); }
+  .prose :global(blockquote) {
+    margin: var(--m) 0;
+    padding: var(--m);
+    border-radius: var(--radius-m);
+    background: var(--fill);
+    font-size: var(--text-lg);
+    line-height: var(--lh-lg);
+  }
+  .prose :global(figcaption),
+  .prose :global(img + em) { display: block; color: var(--text-weak); font-size: var(--text-sm); line-height: var(--lh-sm); font-style: normal; }
+
+  .next {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--m);
+    padding-block: var(--xl);
+    border-top: 1px solid var(--stroke-weak);
+    color: var(--text-strong);
+    text-decoration: none;
+  }
+  .next:hover { color: var(--text-strong); }
+  .next-text { display: flex; flex-direction: column; gap: var(--xs); }
+  .next-title { font-size: clamp(26px, 3vw, 37px); line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
+  .next:hover .next-title { text-decoration: underline; text-underline-offset: 6px; }
+</style>

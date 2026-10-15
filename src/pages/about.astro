@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+import { site } from '../site';
+---
+
+<Base title="About">
+  <div class="container">
+    <section class="about split" aria-labelledby="about-heading">
+      <h1 id="about-heading" class="page-title">About</h1>
+      <div class="split-body">
+        {site.about.paragraphs.map((text, i) => <p class={i === 0 ? 'large' : 'large weak'}>{text}</p>)}
+        <a class="resume-link" href="/resume">View résumé</a>
+      </div>
+    </section>
+
+    <section class="music split" aria-labelledby="music-heading">
+      <h2 id="music-heading" class="split-heading">{site.home.outsideWork.heading}</h2>
+      <div class="split-body cards">
+        <a class="card lilac" href={site.links.spotify}>{site.home.outsideWork.spotifyLabel}</a>
+        <a class="card peach" href={site.links.gumroad}>{site.home.outsideWork.gumroadLabel}</a>
+      </div>
+    </section>
+
+    <Contact />
+  </div>
+</Base>
+
+<style>
+  .about { padding-block: var(--xxl); }
+  .page-title {
+    flex: 1 1 280px;
+    font-size: clamp(37px, 4.2vw, 54px);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+  }
+  .large { font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .large + .large { margin-top: var(--m); }
+  .resume-link { display: inline-flex; align-items: center; min-height: var(--target); margin-top: var(--m); }
+  .music { padding-block: var(--xl); border-top: 1px solid var(--stroke-weak); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--m); }
+  .card {
+    display: flex;
+    align-items: center;
+    min-height: 96px;
+    padding: var(--m);
+    border-radius: var(--radius-m);
+    color: var(--text-strong);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .card:hover { color: var(--text-strong); text-decoration: underline; }
+  .lilac { background: var(--lilac); }
+  .peach { background: var(--peach); }
+</style>

@@ -143,7 +143,8 @@ export function drawCity(
   for (let x = 0; x < W; ) {
     const w = 14 + Math.floor(rand() * 16);
     const h = Math.round((12 + rand() * 26) * heightScale);
-    if (rand() < keep * 0.8) rect(x, H - h, w, h, C.back, Cls.Back);
+    const coversSun = x < sunX + SR && x + w > sunX - SR;
+    if (rand() < keep * 0.8 && !coversSun) rect(x, H - h, w, h, C.back, Cls.Back);
     x += w + Math.floor(rand() * 10);
   }
 

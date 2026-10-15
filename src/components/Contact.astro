@@ -1,0 +1,54 @@
+---
+import { site } from '../site';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+const { headingLevel: Heading = 'h2' } = Astro.props;
+---
+
+<section id="contact" class="contact split" aria-labelledby="contact-heading">
+  <Heading id="contact-heading" class="split-heading">Contact</Heading>
+  <div class="split-body">
+    <p class="email">{site.email}</p>
+    <div class="actions btn-stack">
+      <button class="btn btn-primary" type="button" data-copy-email={site.email}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+          <path d="M13 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+        </svg>
+        <span data-label>Copy email</span>
+      </button>
+      <a class="btn btn-secondary" href={site.links.linkedin} rel="me">Open LinkedIn</a>
+    </div>
+    <p class="visually-hidden" role="status" data-copy-status></p>
+  </div>
+</section>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-email]')) {
+    const label = button.querySelector('[data-label]')!;
+    const status = button.closest('section')?.querySelector('[data-copy-status]');
+    const email = button.dataset.copyEmail!;
+    let timer: number | undefined;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        label.textContent = 'Email copied';
+        if (status) status.textContent = `${email} copied to clipboard`;
+      } catch {
+        // Clipboard can be blocked (permissions, insecure context): fall back to the mail app.
+        location.href = `mailto:${email}`;
+        return;
+      }
+      clearTimeout(timer);
+      timer = window.setTimeout(() => (label.textContent = 'Copy email'), 2000);
+    });
+  }
+</script>
+
+<style>
+  .contact { padding-block: var(--xl) var(--xxl); border-top: 1px solid var(--stroke-weak); }
+  .email { font-size: var(--text-lg); line-height: var(--lh-lg); overflow-wrap: anywhere; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s); margin-top: var(--m); }
+</style>

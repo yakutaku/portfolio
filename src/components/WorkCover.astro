@@ -1,0 +1,26 @@
+---
+interface Props {
+  cover?: string;
+  alt: string;
+  tint: 'mint' | 'lilac' | 'peach' | 'lemon';
+  ratio?: string;
+  eager?: boolean;
+}
+const { cover, alt, tint, ratio = '3 / 2', eager = false } = Astro.props;
+---
+
+<div class="cover" style={`--ratio: ${ratio}; --tint: var(--${tint})`}>
+  {cover && <img src={cover} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />}
+  <slot />
+</div>
+
+<style>
+  .cover {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--tint);
+  }
+  img { width: 100%; height: 100%; object-fit: cover; }
+</style>

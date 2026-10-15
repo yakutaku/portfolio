@@ -42,8 +42,11 @@ export interface PixelCityOptions {
   citySize?: number;
   /** 0 = sunset, 1 = night. Default 0. */
   night?: number;
-  /** Desired canvas height in CSS px; the real height snaps to whole pixels. */
-  targetHeight?: () => number;
+  /**
+   * The container sets the size (CSS decides it, so the layout never shifts).
+   * The canvas covers it at a whole-number pixel scale, anchored to the bottom
+   * so any overflow crops plain sky rather than the city or water.
+   */
   forceWebGL?: boolean;
   reducedMotion?: boolean;
 }
@@ -82,11 +85,14 @@ export async function createPixelCity(container: HTMLElement, options: PixelCity
 async function start(container: HTMLElement, options: PixelCityOptions, forceWebGL: boolean): Promise<PixelCity> {
   const reducedMotion =
     options.reducedMotion ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targetHeight = options.targetHeight ?? (() => Math.min(600, Math.max(280, window.innerWidth * 0.4)));
 
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
   canvas.style.display = 'block';
+  canvas.style.position = 'absolute';
+  canvas.style.left = '50%';
+  canvas.style.bottom = '0';
+  canvas.style.transform = 'translateX(-50%)';
   canvas.style.touchAction = 'pan-y';
 
   const renderer = new THREE.WebGPURenderer({ canvas, antialias: false, forceWebGL });
@@ -234,7 +240,7 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
   let citySize = options.citySize ?? 0.5;
   let gridW = 0;
   let scale = 1;
-  let lastCssWidth = -1;
+  let lastCssSize = '';
   let running = false;
   let visible = true;
   let lastFrame = 0;
@@ -260,17 +266,19 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
 
   const resize = () => {
     const cssWidth = container.clientWidth;
-    if (cssWidth === lastCssWidth || cssWidth === 0) return;
-    lastCssWidth = cssWidth;
+    const cssHeight = container.clientHeight;
+    const key = `${cssWidth}x${cssHeight}`;
+    if (key === lastCssSize || cssWidth === 0 || cssHeight === 0) return;
+    lastCssSize = key;
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
     const deviceWidth = Math.round(cssWidth * dpr);
     // Whole-number scale so every city pixel is the same size on screen.
-    scale = Math.max(1, Math.floor((targetHeight() * dpr) / GRID_HEIGHT), Math.ceil(deviceWidth / MAX_GRID_WIDTH));
+    // Round up so the canvas always covers the container.
+    scale = Math.max(1, Math.ceil((cssHeight * dpr) / GRID_HEIGHT), Math.ceil(deviceWidth / MAX_GRID_WIDTH));
     const newGridW = Math.ceil(deviceWidth / scale);
     renderer.setSize(newGridW * scale, GRID_HEIGHT * scale, false);
     canvas.style.width = `${(newGridW * scale) / dpr}px`;
     canvas.style.height = `${(GRID_HEIGHT * scale) / dpr}px`;
-    container.style.height = canvas.style.height;
     if (newGridW !== gridW) {
       gridW = newGridW;
       layout = layoutFor(gridW);
@@ -331,7 +339,6 @@ async function start(container: HTMLElement, options: PixelCityOptions, forceWeb
     cityTexture.dispose();
     renderer.dispose();
     canvas.remove();
-    container.style.height = '';
     throw error;
   }
 

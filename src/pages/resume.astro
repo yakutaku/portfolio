@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Résumé">
+  <div class="container page">
+    <h1>Résumé</h1>
+    <p class="weak">[Placeholder: your updated résumé goes here. Add a PDF at /public/resume.pdf and link it.]</p>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: var(--xxl); display: flex; flex-direction: column; gap: var(--m); max-width: 760px; margin-left: 0; }
+  h1 { font-size: clamp(37px, 4.2vw, 54px); line-height: 1.18; letter-spacing: -0.025em; }
+</style>
