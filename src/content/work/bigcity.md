@@ -1,10 +1,11 @@
 ---
 title: "[BigCity case study title]"
-summary: "[One-line outcome summary]"
+client: "sunshower audio"
+tldr: "[TL;DR]"
 years: "2026"
 role: "[Role]"
 team: "[Team]"
-outcome: "[Headline metric]"
+timeline: "[Timeline]"
 order: 3
 tint: peach
 tag: "[Demo tag]"

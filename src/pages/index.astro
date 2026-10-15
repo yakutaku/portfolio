@@ -30,13 +30,13 @@ const { home } = site;
           work.map((item, i) => (
             <li>
               <a class="work-row" href={`/work/${item.id}`}>
-                <WorkCover cover={item.data.cover} alt={item.data.coverAlt} tint={item.data.tint} eager={i === 0}>
+                <WorkCover cover={item.data.cover} alt="" tint={item.data.tint} ratio="16 / 10" eager={i === 0}>
                   {item.data.tag && <span class="tag cover-tag">{item.data.tag}</span>}
                 </WorkCover>
                 <div class="work-text">
-                  <span class="meta weak">{item.data.years} · {item.data.role}</span>
+                  <span class="meta weak">{item.data.client} // {item.data.years}</span>
                   <h3>{item.data.title}</h3>
-                  <p class="weak">{item.data.summary}</p>
+                  <p class="weak">{item.data.summary ?? item.data.tldr}</p>
                   <span class="read">{home.readLabel}<span class="visually-hidden">: {item.data.title}</span></span>
                 </div>
               </a>
@@ -51,7 +51,7 @@ const { home } = site;
       <div class="split-body">
         <p class="weak">{home.outsideWork.body}</p>
         <div class="links">
-          <a href={site.links.spotify}>{home.outsideWork.spotifyLabel}</a>
+          {site.links.spotify && <a href={site.links.spotify}>{home.outsideWork.spotifyLabel}</a>}
           <a href={site.links.gumroad}>{home.outsideWork.gumroadLabel}</a>
         </div>
       </div>

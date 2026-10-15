@@ -6,13 +6,17 @@ const work = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/work' }),
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
+    /** Shown as "client // years", e.g. "atSpoke (acquired by Okta) // 2020–22". */
+    client: z.string(),
     years: z.string(),
     role: z.string(),
     team: z.string(),
-    outcome: z.string(),
+    timeline: z.string(),
+    tldr: z.string(),
+    /** Optional shorter line for the home page; falls back to the TL;DR. */
+    summary: z.string().optional(),
     order: z.number(),
-    /** Path under /public, e.g. /work/atspoke/cover.png. Omit to show a coloured placeholder. */
+    /** Path under /public, e.g. /work/atspoke/00-cover.webp. Omit to show a coloured placeholder. */
     cover: z.string().optional(),
     coverAlt: z.string().default(''),
     /** Pastel behind the cover; also used for the placeholder. */

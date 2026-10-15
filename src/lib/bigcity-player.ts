@@ -9,7 +9,16 @@ export class BigCityPlayer {
   private size = 0.5;
   private loading: Promise<void> | null = null;
 
-  constructor(private readonly urls: readonly string[]) {}
+  /**
+   * Each file holds `pad` seconds of wrapped audio, the loop itself, then `pad` more.
+   * Looping only the middle keeps the loop seamless even when a browser's AAC decoder
+   * shifts the audio by a few milliseconds of encoder padding.
+   */
+  constructor(
+    private readonly urls: readonly string[],
+    private readonly loopSeconds: number,
+    private readonly pad: number,
+  ) {}
 
   get playing() {
     return this.ctx?.state === 'running';
@@ -76,8 +85,10 @@ export class BigCityPlayer {
       const source = ctx.createBufferSource();
       source.buffer = buffer;
       source.loop = true;
+      source.loopStart = this.pad;
+      source.loopEnd = this.pad + this.loopSeconds;
       source.connect(gain);
-      source.start(startAt);
+      source.start(startAt, this.pad);
       return gain;
     });
     this.applyGains(true);

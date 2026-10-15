@@ -18,7 +18,7 @@ const sections = headings.filter((h) => h.depth === 2);
 const d = entry.data;
 ---
 
-<Base title={d.title} description={d.summary} image={d.cover}>
+<Base title={d.title} description={d.summary ?? d.tldr} image={d.cover}>
   <article class="container">
     <a class="back" href="/#work-heading">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -28,18 +28,18 @@ const d = entry.data;
     </a>
 
     <header class="head">
+      <p class="eyebrow weak">{d.client} // {d.years}</p>
       <h1>{d.title}</h1>
-      <p class="summary weak">{d.summary}</p>
+      <p class="summary"><strong>TL;DR:</strong> {d.tldr}</p>
     </header>
 
     <dl class="facts">
       <div><dt class="weak">Role</dt><dd>{d.role}</dd></div>
-      <div><dt class="weak">Timeline</dt><dd>{d.years}</dd></div>
       <div><dt class="weak">Team</dt><dd>{d.team}</dd></div>
-      <div><dt class="weak">Outcome</dt><dd>{d.outcome}</dd></div>
+      <div><dt class="weak">Timeline</dt><dd>{d.timeline}</dd></div>
     </dl>
 
-    <WorkCover cover={d.cover} alt={d.coverAlt} tint={d.tint} ratio="16 / 9" eager />
+    <WorkCover cover={d.cover} alt={d.coverAlt} tint={d.tint} ratio="16 / 10" eager />
 
     <div class="body">
       {
@@ -108,9 +108,10 @@ const d = entry.data;
 
 <style>
   .back { display: inline-flex; align-items: center; gap: var(--xs); min-height: var(--target); margin-top: var(--l); }
-  .head { display: flex; flex-direction: column; gap: var(--m); padding-block: var(--l) var(--xl); max-width: 880px; }
+  .head { display: flex; flex-direction: column; gap: var(--s); padding-block: var(--l) var(--xl); max-width: 880px; }
+  .eyebrow { font-size: var(--text-sm); line-height: var(--lh-sm); }
   h1 { font-size: clamp(37px, 4.2vw, 54px); line-height: 1.18; letter-spacing: -0.025em; }
-  .summary { max-width: 720px; font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .summary { max-width: 720px; margin-top: var(--xs); font-size: var(--text-lg); line-height: var(--lh-lg); }
 
   .facts {
     display: grid;
@@ -142,7 +143,9 @@ const d = entry.data;
   .toc a:hover { background: var(--fill-hover); color: var(--text-strong); }
   .toc a[aria-current] { color: var(--text-strong); font-weight: 700; }
 
-  .prose { flex: 1 1 560px; max-width: 720px; min-width: 0; }
+  /* Text stays at a readable 40–80 characters; figures get the full column. */
+  .prose { flex: 1 1 560px; max-width: 960px; min-width: 0; }
+  .prose > :global(*:not(figure, section)) { max-width: 720px; }
   .prose :global(h2) {
     font-size: var(--text-2xl);
     line-height: var(--lh-2xl);
@@ -151,22 +154,93 @@ const d = entry.data;
     scroll-margin-top: var(--m);
   }
   .prose :global(h2:first-child) { margin-top: 0; }
+  /* A section label followed by a headline: the label becomes a small eyebrow. */
+  .prose :global(h2:has(+ h3)) {
+    margin-bottom: var(--xs);
+    font-size: var(--text-sm);
+    line-height: var(--lh-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-weak);
+  }
+  .prose :global(h2 + h3) {
+    margin: 0 0 var(--m);
+    font-size: var(--text-2xl);
+    line-height: var(--lh-2xl);
+    letter-spacing: -0.01em;
+  }
   .prose :global(h3) { font-size: var(--text-xl); line-height: var(--lh-xl); margin: var(--xl) 0 var(--xs); }
   .prose :global(p),
   .prose :global(ul),
-  .prose :global(ol) { margin: 0 0 var(--s); }
+  .prose :global(ol) { margin: 0 0 var(--m); }
+  .prose :global(ul) { padding-left: 1.25em; }
   .prose :global(li + li) { margin-top: var(--xs); }
-  .prose :global(img) { border-radius: var(--radius-m); margin-block: var(--m) var(--xs); }
   .prose :global(blockquote) {
-    margin: var(--m) 0;
+    margin: var(--l) 0;
     padding: var(--m);
     border-radius: var(--radius-m);
-    background: var(--fill);
+    background: var(--lilac);
     font-size: var(--text-lg);
     line-height: var(--lh-lg);
   }
-  .prose :global(figcaption),
-  .prose :global(img + em) { display: block; color: var(--text-weak); font-size: var(--text-sm); line-height: var(--lh-sm); font-style: normal; }
+  .prose :global(blockquote p) { margin: 0; }
+
+  .prose :global(figure) { margin: var(--xl) 0; }
+  .prose :global(figure img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--stroke-weak);
+  }
+  .prose :global(figcaption) {
+    max-width: 720px;
+    margin-top: var(--s);
+    color: var(--text-weak);
+    font-size: var(--text-sm);
+    line-height: var(--lh-sm);
+  }
+  .prose :global(.media-placeholder) {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-m);
+    background: var(--fill);
+    color: var(--text-weak);
+  }
+  .prose :global(.credit) { margin-top: var(--xxl); color: var(--text-weak); font-size: var(--text-sm); line-height: var(--lh-sm); }
+
+  /* Final / Wireframe toggle: plain radio buttons, so it works without JavaScript. */
+  .prose :global(.compare-toggle) {
+    display: inline-flex;
+    gap: 4px;
+    margin: 0 0 var(--s);
+    padding: 4px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--fill);
+  }
+  .prose :global(.compare-toggle label) {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 var(--s);
+    border-radius: 10px;
+    font-size: var(--text-sm);
+    cursor: pointer;
+  }
+  .prose :global(.compare-toggle label::after) { content: ''; position: absolute; inset: -4px 0; } /* 48px target */
+  .prose :global(.compare-toggle input) { position: absolute; opacity: 0; pointer-events: none; }
+  .prose :global(.compare-toggle label:hover) { background: var(--fill-hover); }
+  .prose :global(.compare-toggle label:has(input:checked)) {
+    background: #fff;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgb(31 31 36 / 0.12);
+  }
+  .prose :global(.compare-toggle label:has(input:focus-visible)) { outline: 3px solid var(--brand); outline-offset: 2px; }
+  .prose :global(.compare .is-wireframe),
+  .prose :global(.compare:has(input[value='wireframe']:checked) .is-final) { display: none; }
+  .prose :global(.compare:has(input[value='wireframe']:checked) .is-wireframe) { display: block; }
 
   .next {
     display: flex;

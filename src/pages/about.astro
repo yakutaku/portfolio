@@ -17,7 +17,7 @@ import { site } from '../site';
     <section class="music split" aria-labelledby="music-heading">
       <h2 id="music-heading" class="split-heading">{site.home.outsideWork.heading}</h2>
       <div class="split-body cards">
-        <a class="card lilac" href={site.links.spotify}>{site.home.outsideWork.spotifyLabel}</a>
+        {site.links.spotify && <a class="card lilac" href={site.links.spotify}>{site.home.outsideWork.spotifyLabel}</a>}
         <a class="card peach" href={site.links.gumroad}>{site.home.outsideWork.gumroadLabel}</a>
       </div>
     </section>

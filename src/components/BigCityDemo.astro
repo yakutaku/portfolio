@@ -3,7 +3,7 @@ import PixelCity from './PixelCity.astro';
 import { site } from '../site';
 
 const { heading, body, audio } = site.bigcityDemo;
-const hasAudio = audio.length > 0;
+const hasAudio = audio.files.length > 0;
 ---
 
 <section class="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-labelledby="demo-heading">
@@ -67,8 +67,8 @@ const hasAudio = audio.length > 0;
   import type { PixelCity } from '../lib/pixel-city/scene';
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-bigcity-demo]')) {
-    const urls: string[] = JSON.parse(root.dataset.audio ?? '[]');
-    const player = urls.length ? new BigCityPlayer(urls) : null;
+    const audio: { files: string[]; loopSeconds: number; padSeconds: number } = JSON.parse(root.dataset.audio!);
+    const player = audio.files.length ? new BigCityPlayer(audio.files, audio.loopSeconds, audio.padSeconds) : null;
     const cityEl = root.querySelector<HTMLElement & { pixelCity?: Promise<PixelCity | null> }>('[data-pixel-city]')!;
     const size = root.querySelector<HTMLInputElement>('[data-size]')!;
     const readout = root.querySelector<HTMLOutputElement>('[data-readout]')!;

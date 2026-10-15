@@ -2,14 +2,15 @@
 // Bracketed values are placeholders for you to replace.
 
 export const site = {
-  name: '[Your name]',
+  name: 'Jonathan Day',
   title: '[Your title]',
   url: 'https://[your-domain]',
   description: '[One-sentence site description for search results and link previews]',
-  email: '[you@domain.com]',
+  email: 'jyday@proton.me',
   links: {
-    linkedin: 'https://www.linkedin.com/in/[your-handle]',
-    spotify: 'https://open.spotify.com/artist/[your-id]',
+    linkedin: 'https://www.linkedin.com/in/-jonathanday/',
+    /** Add your artist URL to show the Spotify link. */
+    spotify: '',
     gumroad: 'https://sunshoweraudio.gumroad.com/l/bigcity',
   },
   home: {
@@ -28,11 +29,21 @@ export const site = {
     heading: '[Demo heading]',
     body: '[1–2 sentences on what City size does to the sound]',
     /**
-     * One loop per City size step, all the same length and start point, e.g.
-     * ['/audio/bigcity-000.m4a', '/audio/bigcity-025.m4a', ..., '/audio/bigcity-100.m4a'].
-     * Leave empty to show the visual-only demo.
+     * One loop per City size step, all the same length and start point.
+     * Each file is padded with `padSeconds` of wrapped audio on both ends (see README).
+     * Leave `files` empty to show the visual-only demo.
      */
-    audio: [] as string[],
+    audio: {
+      files: [
+        '/audio/bigcity-000.m4a',
+        '/audio/bigcity-025.m4a',
+        '/audio/bigcity-050.m4a',
+        '/audio/bigcity-075.m4a',
+        '/audio/bigcity-100.m4a',
+      ] as string[],
+      loopSeconds: 19.2,
+      padSeconds: 0.25,
+    },
   },
   about: {
     paragraphs: ['[Sentence 1: designing and design engineering]', '[Sentence 2: indie electronic music and DJing]'],
