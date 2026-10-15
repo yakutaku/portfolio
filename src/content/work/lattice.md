@@ -73,7 +73,7 @@ Our designer owned the visual navigation updates. I owned research, wireframing,
 </figure>
 
 <figure>
-  <img src="/work/lattice/08-browser-back-fix.webp" alt="Two flows. Before: from the reviews list, open a review, press the browser&#x27;s back button, land on Home. After: the same steps return you to the reviews list." width="1440" height="1072" loading="lazy" decoding="async">
+  <img src="/work/lattice/08-browser-back-fix.webp" alt="Two flows. Before: from the reviews list, open a review, press the browser&#x27;s back button, land on Home. After: the same steps return you to the reviews list." width="1440" height="1064" loading="lazy" decoding="async">
   <figcaption>Back now returns people to where they were, with every existing URL intact.</figcaption>
 </figure>
 
