@@ -24,7 +24,7 @@ const d = entry.data;
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <path d="M16 10H4M9 5l-5 5 5 5"></path>
       </svg>
-      Back to work
+      Back
     </a>
 
     <header class="head">
@@ -157,10 +157,8 @@ const d = entry.data;
   /* A section label followed by a headline: the label becomes a small eyebrow. */
   .prose :global(h2:has(+ h3)) {
     margin-bottom: var(--xs);
-    font-size: var(--text-sm);
-    line-height: var(--lh-sm);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: var(--text-md);
+    line-height: var(--lh-md);
     color: var(--text-weak);
   }
   .prose :global(h2 + h3) {

@@ -11,7 +11,7 @@ const { home } = site;
 ---
 
 <Base>
-  <PixelCity id="hero-city" height="clamp(280px, 40vw, 600px)" scrollNight hint={home.interactionHint} />
+  <PixelCity id="hero-city" height="clamp(280px, 40vw, 600px)" scrollNight />
   <div class="stripes" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <div class="container">
@@ -36,7 +36,6 @@ const { home } = site;
                 <div class="work-text">
                   <span class="meta weak">{item.data.client} // {item.data.years}</span>
                   <h3>{item.data.title}</h3>
-                  <p class="weak">{item.data.summary ?? item.data.tldr}</p>
                   <span class="read">{home.readLabel}<span class="visually-hidden">: {item.data.title}</span></span>
                 </div>
               </a>
@@ -66,8 +65,12 @@ const { home } = site;
   .name {
     font-size: clamp(56px, 12vw, 176px);
     line-height: 0.92;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.035em;
     overflow-wrap: anywhere;
+    /* Optical alignment: the J's hook sticks out left of its stem, so at this size the
+       stem looks indented. Hanging the hook into the margin lines the stem up with the
+       text below. Tune this one value by eye. */
+    margin-left: -0.12em;
   }
   .intro-row { display: flex; flex-wrap: wrap; gap: var(--m) var(--l); margin-top: var(--xl); }
   .headline {

@@ -4,9 +4,9 @@ client: "Lattice"
 years: "2022"
 role: "Designer + PM"
 team: "Me, 1 designer, 1 tech lead, 2 engineers"
-timeline: "3 months (Jun–Aug 2022)"
+timeline: "3 months (Jun – Aug 2022)"
 tldr: "I led research and IA for Lattice’s navigation overhaul as it grew from a few disparate products into an all-in-one HR platform. Navigation CSAT increased by 15% and time to open a review (a core action) decreased by 20%."
-order: 2
+order: 3
 cover: "/work/lattice/01-cover.webp"
 coverAlt: "Lattice's 2022 side navigation, a long list of 13 tools, fading behind the redesigned navigation grouped into everyday workflows and an admin section."
 tint: lilac

@@ -4,9 +4,9 @@ client: "BigCity"
 years: "2026"
 role: "Design engineer (solo)"
 team: "Me, plus several producer friends as beta testers"
-timeline: "Sep–Oct 2026"
+timeline: "Sep – Oct 2026"
 tldr: "I designed and built BigCity, a one-knob plugin that adds city pop sparkle to any track at under 1% CPU, and shipped it pay-what-you-want."
-order: 3
+order: 1
 cover: "/work/bigcity/01-cover.webp"
 coverRatio: "16 / 9"
 coverAlt: "BigCity: the air and leisure of city pop, available with the twist of a knob. The plugin shows a City size knob set to 50 and a pixel skyline at sunset."

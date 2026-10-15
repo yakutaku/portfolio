@@ -1,12 +1,12 @@
 ---
 title: "Crafting onboarding for an AI-powered IT platform"
 client: "atSpoke (acquired by Okta)"
-years: "2020–22"
+years: "2020 – 22"
 role: "Designer + PM"
 team: "Me, 1 designer, 1 tech lead, 3 engineers"
-timeline: "3 months (Jan–Mar 2021)"
+timeline: "3 months (Jan – Mar 2021)"
 tldr: "I designed and shipped self-serve onboarding that cut onboarding time in half and took free-to-paid conversion from near zero to 16% for people who finished it."
-order: 1
+order: 2
 cover: "/work/atspoke/00-cover.webp"
 coverAlt: "atSpoke's self-serve onboarding flow."
 tint: mint
@@ -39,16 +39,11 @@ IT and HR managers don't have time to dig through submenus. Across 10+ customer 
 - Filing a first ticket
 - Getting an answer from their company's knowledge base
 
-For research, I also recorded myself onboarding into SaaS products (Jira, Linear, Loom) and games (Animal Crossing, Overwatch). The best ones:
+For research, I also recorded myself onboarding into other SaaS products (Jira, Linear, Loom) and games (Animal Crossing, Overwatch). The best ones:
 
 - Respected people's time and attention
 - Taught skills in context
 - Never made people fight to learn the basics
-
-<figure>
-  <img src="/work/atspoke/s1-aha-moments.webp" alt="The three aha moments: connecting Slack or Teams, filing a first ticket, and getting an answer from the knowledge base." width="1920" height="939" loading="lazy" decoding="async">
-  <figcaption>The three aha moments from interviews and analytics. Each one became a step in the flow.</figcaption>
-</figure>
 
 ## Build
 
@@ -89,10 +84,12 @@ Our designer owned the setup flows. I led research, strategy, flows, copy, and d
 
 Each step pairs the original wireframe with the shipped design, in the order a new user sees them.
 
+<!-- Walkthrough video goes here when it arrives:
 <figure>
   <div class="media-placeholder">[Walkthrough video]</div>
   <figcaption>The full onboarding flow, from an empty inbox to the finish line.</figcaption>
 </figure>
+-->
 
 <figure class="compare">
   <fieldset class="compare-toggle">
@@ -175,17 +172,13 @@ Each step pairs the original wireframe with the shipped design, in the order a n
 
 ### From near zero to a new channel
 
-We launched onboarding in March 2021. Of the people who completed it, 16% upgraded to paid, up from near zero. People who finish onboarding tend to be more motivated, so onboarding can't take credit for all of that lift. Average onboarding time also dropped by half. The bigger shift was in how the company saw self-serve: sales started treating it as its own channel.
-
-<figure>
-  <img src="/work/atspoke/s5-results.webp" alt="Results: 16% of people who completed onboarding upgraded to paid, and average onboarding time dropped by half." width="1920" height="845" loading="lazy" decoding="async">
-</figure>
+We launched onboarding in March 2021. Of the customers who completed it, 16% upgraded to a paid plan (up from nearly zero). People who finish onboarding tend to be more motivated, so onboarding can't take credit for all of that lift. Average onboarding time also dropped by half. The bigger shift was that sales started treating self-serve as its own channel.
 
 Okta acquired us in Q3 2021 for ~$79M, and their leadership called out our onboarding as especially strong compared to other SaaS products. Unfortunately, atSpoke was sunset a few months later, but hey, that's startup life for you.
 
 ## What I'd do differently
 
-**Choose tools for the long run, not the launch.** Pendo saved us weeks up front, but its element targeting was unreliable, and support calls and emails kept pulling me off other projects. WalkMe cost more, but it was more flexible where it counted.
+**Choose tools for the long run, not the launch.** Pendo saved us weeks up front, but its element targeting was unreliable, and support calls and emails kept pulling me off other projects. WalkMe cost more, but it was more flexible around element targeting and had a better technical support team.
 
 **Get to customers sooner.** I'd put prototypes in front of customers sooner and run a lighter process. Direct customer feedback is worth infinitely more than the perfect spec (or in Overwatch parlance: you learn more by playing than you do researching the perfect keyboard settings for your main).
 

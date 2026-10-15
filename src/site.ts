@@ -3,7 +3,7 @@
 
 export const site = {
   name: 'Jonathan Day',
-  title: '[Your title]',
+  title: 'Designer',
   url: 'https://[your-domain]',
   description: '[One-sentence site description for search results and link previews]',
   email: 'jyday@proton.me',
@@ -16,8 +16,7 @@ export const site = {
   home: {
     headline: 'I make complex products feel good to use',
     intro: '[Your 2-sentence intro]',
-    interactionHint: '[Interaction hint]',
-    readLabel: '[Link text, e.g. Read the case study]',
+    readLabel: 'Read',
     outsideWork: {
       heading: '[Outside work heading]',
       body: '[2–3 sentences on music, live shows and plugins]',
@@ -53,6 +52,5 @@ export const site = {
 export const nav = [
   { href: '/', label: 'Work' },
   { href: '/about', label: 'About' },
-  { href: '/resume', label: 'Résumé' },
-  { href: '/about#contact', label: 'Contact' },
+  { href: '/resume', label: 'Resume' },
 ] as const;
