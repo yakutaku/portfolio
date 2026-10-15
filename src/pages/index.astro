@@ -19,7 +19,7 @@ const { home } = site;
       <h1 id="name" class="name">{site.name}</h1>
       <div class="intro-row">
         <p class="headline">{home.headline}</p>
-        <p class="lede weak">{home.intro}</p>
+        {home.intro && <p class="lede weak">{home.intro}</p>}
       </div>
     </section>
 

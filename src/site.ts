@@ -15,7 +15,8 @@ export const site = {
   },
   home: {
     headline: 'I make complex products feel good to use',
-    intro: '[Your 2-sentence intro]',
+    /** Optional line beside the headline; leave empty to hide it. */
+    intro: '',
     readLabel: 'Read',
     outsideWork: {
       heading: '[Outside work heading]',
@@ -45,7 +46,10 @@ export const site = {
     },
   },
   about: {
-    paragraphs: ['[Sentence 1: designing and design engineering]', '[Sentence 2: indie electronic music and DJing]'],
+    paragraphs: [
+      'Hi, I’m Jonathan. I’m a product designer and builder. For the last 10 years, I’ve been learning how to make complex products feel great to use.',
+      'Outside of work, I make electronic music and DJ around SoCal and NYC.',
+    ],
   },
 } as const;
 
