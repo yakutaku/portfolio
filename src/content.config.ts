@@ -19,6 +19,8 @@ const work = defineCollection({
     /** Path under /public, e.g. /work/atspoke/00-cover.webp. Omit to show a coloured placeholder. */
     cover: z.string().optional(),
     coverAlt: z.string().default(''),
+    /** Cover aspect ratio on the case study page, e.g. "16 / 9". */
+    coverRatio: z.string().default('16 / 10'),
     /** Pastel behind the cover; also used for the placeholder. */
     tint: z.enum(['mint', 'lilac', 'peach', 'lemon']),
     tag: z.string().optional(),

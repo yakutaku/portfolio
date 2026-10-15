@@ -39,7 +39,7 @@ const d = entry.data;
       <div><dt class="weak">Timeline</dt><dd>{d.timeline}</dd></div>
     </dl>
 
-    <WorkCover cover={d.cover} alt={d.coverAlt} tint={d.tint} ratio="16 / 10" eager />
+    <WorkCover cover={d.cover} alt={d.coverAlt} tint={d.tint} ratio={d.coverRatio} eager />
 
     <div class="body">
       {

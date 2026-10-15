@@ -85,6 +85,8 @@ const hasAudio = audio.files.length > 0;
       knob.style.setProperty('--angle', `${-135 + value * 270}deg`);
       player?.setSize(value);
       city?.setCitySize(value);
+      // Like the plugin: as the city grows, the sun sets and windows light up one by one.
+      city?.setNight(value * 0.55);
     };
     size.addEventListener('input', applySize);
     applySize();
