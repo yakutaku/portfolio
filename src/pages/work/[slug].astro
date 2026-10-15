@@ -86,6 +86,49 @@ const d = entry.data;
   const slot = document.querySelector('[data-prose] [data-demo]');
   if (demo && slot) slot.replaceWith(demo);
 
+  // Split-flap (Solari) boards: each character flips through the deck and lands on its value.
+  const DECK = ' +-0123456789%';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (const board of document.querySelectorAll<HTMLElement>('[data-solari]')) {
+    const value = board.textContent!.trim();
+    board.textContent = '';
+    const label = document.createElement('span');
+    label.className = 'visually-hidden';
+    label.textContent = value;
+    const cells = [...value].map((char) => {
+      const cell = document.createElement('span');
+      cell.className = 'flap';
+      cell.setAttribute('aria-hidden', 'true');
+      cell.dataset.target = char;
+      cell.textContent = reduceMotion ? char : ' ';
+      board.append(cell);
+      return cell;
+    });
+    board.prepend(label);
+    if (reduceMotion) continue;
+
+    const flip = (cell: HTMLElement, delay: number) => {
+      const target = cell.dataset.target!;
+      const end = DECK.indexOf(target);
+      // Start a few cards back so every character visibly flips, even short decks.
+      let i = (end - 6 - Math.floor(Math.random() * 4) + DECK.length) % DECK.length;
+      setTimeout(function step() {
+        cell.textContent = DECK[i];
+        cell.classList.remove('flapping');
+        void cell.offsetWidth; // restart the flap animation
+        cell.classList.add('flapping');
+        if (DECK[i] === target) return;
+        i = (i + 1) % DECK.length;
+        setTimeout(step, 70);
+      }, delay);
+    };
+    new IntersectionObserver((entries, observer) => {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      cells.forEach((cell, n) => flip(cell, n * 110));
+    }, { threshold: 0.6 }).observe(board);
+  }
+
   // Highlight the section being read in the table of contents.
   const links = new Map(
     [...document.querySelectorAll<HTMLAnchorElement>('.toc a')].map((a) => [a.hash.slice(1), a]),
@@ -206,6 +249,57 @@ const d = entry.data;
     color: var(--text-weak);
   }
   .prose :global(.credit) { margin-top: var(--xxl); color: var(--text-weak); font-size: var(--text-sm); line-height: var(--lh-sm); }
+
+  /* Split-flap metric boards */
+  .prose :global(.metrics) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--m);
+  }
+  @media (max-width: 559px) { .prose :global(.metrics) { grid-template-columns: 1fr; } }
+  .prose :global(.metrics figcaption) { grid-column: 1 / -1; margin-top: 0; }
+  .prose :global(.metric) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s);
+    padding: var(--m);
+    border-radius: var(--radius-m);
+    background: var(--fill);
+  }
+  .prose :global(.solari) {
+    display: flex;
+    gap: 6px;
+    margin: 0;
+    font: 700 clamp(44px, 6vw, 64px) / 1 var(--font);
+    font-variant-numeric: tabular-nums;
+  }
+  .prose :global(.flap) {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 0.92em;
+    height: 1.25em;
+    font-size: 0.9em;
+    border-radius: 6px;
+    background: var(--grey-950);
+    color: var(--cream-50);
+    white-space: pre;
+    transform-origin: center;
+  }
+  /* The hairline where the two halves of a real flap meet */
+  .prose :global(.flap::after) {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 2px;
+    margin-top: -1px;
+    background: rgb(251 250 247 / 0.18);
+  }
+  .prose :global(.flap.flapping) { animation: flap 70ms ease-in-out; }
+  @keyframes flap {
+    50% { transform: scaleY(0.15); filter: brightness(0.6); }
+  }
+  .prose :global(.metric-label) { margin: 0; font-weight: 700; }
 
   /* Final / Wireframe toggle: plain radio buttons, so it works without JavaScript. */
   .prose :global(.compare-toggle) {

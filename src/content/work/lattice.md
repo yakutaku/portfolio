@@ -29,16 +29,11 @@ Lattice doubled revenue in 2021 and grew past performance management and engagem
 
 ### “It feels messy” isn’t a brief
 
-With our tech lead and another designer, I audited the platform to find out why navigation felt bad. We called it Project Kondo, after Marie Kondo: keep only what sparks joy. Customer interviews, card sorts, sales call recordings, and product analytics kept surfacing the same three problems:
+With our tech lead and another designer, I audited the platform to find out why navigation felt bad. We called it Project Kondo, after Marie Kondo (keep only what sparks joy). Customer interviews, card sorts, sales call recordings, and product analytics kept surfacing the same three problems:
 
-- **Back didn’t mean back.** The browser back button often dumped users on the homepage, mid-workflow.
-- **Bookmarks were the real nav.** Getting anywhere took so many clicks that admins just bookmarked everything.
-- **The sidebar kept sprawling.** The SaaS equivalent of the 405 in LA: one more lane will fix it, promise.
-
-<figure>
-  <img src="/work/lattice/03-research-findings.webp" alt="Three findings. 1: the browser&#x27;s back button sent people from a review form to Home instead of the reviews list. 2: admins navigated by bookmarks. 3: 13 nav items in one long list. Below: every existing URL had to keep working." width="1440" height="694" loading="lazy" decoding="async">
-  <figcaption>The three pain points.</figcaption>
-</figure>
+- **Back didn’t mean back:** The browser back button often dumped users on the homepage, mid-workflow.
+- **Bookmarks were the real nav:** Getting anywhere took so many clicks that admins just bookmarked everything.
+- **The sidebar kept sprawling:** The SaaS equivalent of the 405 in LA: one more lane will fix it, promise.
 
 ## Constraints
 
@@ -48,27 +43,22 @@ Leadership wanted navigation fixed fast, without adding resources. Engineering w
 
 We also couldn’t break bookmarks. For most admins, bookmarks were the navigation, so every existing URL had to stay intact.
 
-So we drew a clear line. Our pod owned the global shell, routing, and permissions. Everything inside each product area stayed with its team. That kept the project shippable and kept us out of endless stakeholder alignment meetings.
+So we drew a clear line. Our pod owned the global shell, routing, and permissions. Everything inside each product area stayed with its team. That kept the project shippable (and kept us out of endless stakeholder alignment meetings).
 
 <figure>
   <img src="/work/lattice/06-scope-shell-not-rooms.webp" alt="App schematic. The side nav and browser back behavior are marked as changed; the page area owned by other product teams is marked as left alone. Below, scope we didn&#x27;t take on: a full teardown, redesigning team-owned navigation, and getting every team&#x27;s sign-off first." width="1440" height="854" loading="lazy" decoding="async">
-  <figcaption>What our pod owned (the shell) vs. what each product team owned (the rooms).</figcaption>
+  <figcaption>Navigation came down to strengthening the platform (The shell) while leaving the rest of the home (The rooms) alone.</figcaption>
 </figure>
 
 ## The solution
 
 ### One fix per problem
 
-Our designer owned the visual navigation updates. I owned research, wireframing, and IA.
-
 - **Make back mean back.** We fixed browser back behavior without changing a single URL, so every existing bookmark kept working.
 - **Organize by task, not product.** Card sorting showed people group by what they’re doing, not where it lives. We rebuilt the sidebar around core workflows: 1:1s, feedback, engagement, reviews, and goals.
 - **Show each role only what it can use.** Our pod owned permissions, so we hid tools people couldn’t access, like analytics for non-admins.
 
-<figure>
-  <img src="/work/lattice/07a-from-wireframe-to-final.webp" alt="The reconstructed wireframe nav next to the final nav. The structure, groups and Admin label carried through unchanged; the final adds a clearer selected state, a line icon set and accessible contrast on the dark rail." width="1440" height="1224" loading="lazy" decoding="async">
-  <figcaption>The sidebar, from reconstructed wireframe to final design.</figcaption>
-</figure>
+Our designer owned the visual navigation updates. I owned research, wireframing, and IA.
 
 <figure>
   <img src="/work/lattice/07-after-admin-nav-annotated.webp" alt="Redesigned admin side nav with four callouts: selected state uses a fill, a bar and bold text, not color alone; daily workflows grouped together; admin-only tools under one Admin label; 48px rows." width="1440" height="960" loading="lazy" decoding="async">
@@ -104,8 +94,15 @@ Our designer owned the visual navigation updates. I owned research, wireframing,
 
 My role was eliminated in a reorg two weeks before launch. My pod later shared the results from the first quarter after launch. Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
 
-<figure>
-  <img src="/work/lattice/10-results.webp" alt="Results: navigation CSAT up 15%; opening a review 20% faster; power users and prospects said getting around felt smoother; no bookmarked URL broke." width="1440" height="496" loading="lazy" decoding="async">
+<figure class="metrics">
+  <div class="metric">
+    <p class="solari" data-solari>+15%</p>
+    <p class="metric-label">Navigation CSAT after launch</p>
+  </div>
+  <div class="metric">
+    <p class="solari" data-solari>20%</p>
+    <p class="metric-label">Faster to open a review</p>
+  </div>
   <figcaption>Results from the first quarter after launch.</figcaption>
 </figure>
 
@@ -122,10 +119,5 @@ My role was eliminated in a reorg two weeks before launch. My pod later shared t
 ### Role-aware navigation
 
 I’d push role-based navigation further, personalizing what’s surfaced by company size and real usage, so a complex product feels simple no matter how SaaS-fluent you are.
-
-<figure>
-  <img src="/work/lattice/11-concept-role-aware-nav.webp" alt="Concept, not shipped: three navs for the same midsize company. Employees see 8 items, managers get an &#x27;Up next&#x27; section with due work, HR admins see 13 items including an Admin group." width="1440" height="1046" loading="lazy" decoding="async">
-  <figcaption>A concept for navigation that adapts to each person’s role and usage.</figcaption>
-</figure>
 
 <p class="credit">Rebuilt from memory and references in Figma and Claude Code. Visuals refreshed in 2026.</p>
