@@ -14,13 +14,6 @@ import { site } from '../site';
       </div>
     </section>
 
-    <section class="music split" aria-labelledby="music-heading">
-      <h2 id="music-heading" class="split-heading">{site.home.outsideWork.heading}</h2>
-      <div class="split-body cards">
-        {site.links.spotify && <a class="card lilac" href={site.links.spotify}>{site.home.outsideWork.spotifyLabel}</a>}
-        <a class="card peach" href={site.links.gumroad}>{site.home.outsideWork.gumroadLabel}</a>
-      </div>
-    </section>
 
     <Contact />
   </div>
@@ -37,19 +30,4 @@ import { site } from '../site';
   .large { font-size: var(--text-lg); line-height: var(--lh-lg); }
   .large + .large { margin-top: var(--m); }
   .resume-link { display: inline-flex; align-items: center; min-height: var(--target); margin-top: var(--m); }
-  .music { padding-block: var(--xl); border-top: 1px solid var(--stroke-weak); }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--m); }
-  .card {
-    display: flex;
-    align-items: center;
-    min-height: 96px;
-    padding: var(--m);
-    border-radius: var(--radius-m);
-    color: var(--text-strong);
-    font-weight: 700;
-    text-decoration: none;
-  }
-  .card:hover { color: var(--text-strong); text-decoration: underline; }
-  .lilac { background: var(--lilac); }
-  .peach { background: var(--peach); }
 </style>

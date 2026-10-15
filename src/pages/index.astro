@@ -45,16 +45,6 @@ const { home } = site;
       </ul>
     </section>
 
-    <section class="outside split" aria-labelledby="outside-heading">
-      <h2 id="outside-heading" class="split-heading">{home.outsideWork.heading}</h2>
-      <div class="split-body">
-        <p class="weak">{home.outsideWork.body}</p>
-        <div class="links">
-          {site.links.spotify && <a href={site.links.spotify}>{home.outsideWork.spotifyLabel}</a>}
-          <a href={site.links.gumroad}>{home.outsideWork.gumroadLabel}</a>
-        </div>
-      </div>
-    </section>
 
     <Contact />
   </div>
@@ -114,7 +104,4 @@ const { home } = site;
   .read { margin-top: var(--xs); color: var(--brand); text-decoration: underline; text-underline-offset: 4px; }
   .work-row:hover .read { color: var(--brand-hover); text-decoration-thickness: 2px; }
 
-  .outside { padding-bottom: var(--xxl); }
-  .links { display: flex; flex-wrap: wrap; gap: 0 var(--m); margin-top: var(--xs); }
-  .links a { display: inline-flex; align-items: center; min-height: var(--target); }
 </style>

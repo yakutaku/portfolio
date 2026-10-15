@@ -2,15 +2,14 @@
 import PixelCity from './PixelCity.astro';
 import { site } from '../site';
 
-const { heading, body, audio } = site.bigcityDemo;
+const { body, audio } = site.bigcityDemo;
 const hasAudio = audio.files.length > 0;
 ---
 
-<section class="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-labelledby="demo-heading">
+<section class="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-label="BigCity demo">
   <div class="demo-text">
-    <span class="tag">Interactive demo</span>
-    <h2 id="demo-heading">{heading}</h2>
-    <p class="weak">{body}</p>
+    <span class="tag">Demo</span>
+    <p class="demo-lede">{body}</p>
   </div>
 
   <div class="panel">
@@ -147,7 +146,7 @@ const hasAudio = audio.files.length > 0;
 <style>
   .demo { display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
   .demo-text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--xs); }
-  .demo h2 { margin: 0; font-size: var(--text-2xl); line-height: var(--lh-2xl); }
+  .demo-lede { margin: 0; font-size: var(--text-lg); line-height: var(--lh-lg); }
   .panel {
     display: flex;
     flex-direction: column;

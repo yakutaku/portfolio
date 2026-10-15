@@ -18,16 +18,9 @@ export const site = {
     /** Optional line beside the headline; leave empty to hide it. */
     intro: '',
     readLabel: 'Read',
-    outsideWork: {
-      heading: '[Outside work heading]',
-      body: '[2–3 sentences on music, live shows and plugins]',
-      spotifyLabel: '[Spotify link text]',
-      gumroadLabel: '[Gumroad link text]',
-    },
   },
   bigcityDemo: {
-    heading: '[Demo heading]',
-    body: '[1–2 sentences on what City size does to the sound]',
+    body: 'Why read more about BigCity when you can just play with it instead – try it out below!',
     /**
      * One loop per City size step, all the same length and start point.
      * Each file is padded with `padSeconds` of wrapped audio on both ends (see README).
@@ -35,11 +28,11 @@ export const site = {
      */
     audio: {
       files: [
-        '/audio/bigcity-000.m4a',
-        '/audio/bigcity-025.m4a',
-        '/audio/bigcity-050.m4a',
-        '/audio/bigcity-075.m4a',
-        '/audio/bigcity-100.m4a',
+        '/audio/bigcity-000.mp3',
+        '/audio/bigcity-025.mp3',
+        '/audio/bigcity-050.mp3',
+        '/audio/bigcity-075.mp3',
+        '/audio/bigcity-100.mp3',
       ] as string[],
       loopSeconds: 19.2,
       padSeconds: 0.25,
