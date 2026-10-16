@@ -4,8 +4,9 @@
 export const site = {
   name: 'Jonathan Day',
   title: 'Designer',
-  url: 'https://[your-domain]',
-  description: '[One-sentence site description for search results and link previews]',
+  url: 'https://portfolio-nine-coral-54.vercel.app',
+  /** Shown in search results and link previews. */
+  description: 'I make complex products feel good to use',
   email: 'jyday@proton.me',
   links: {
     linkedin: 'https://www.linkedin.com/in/-jonathanday/',
