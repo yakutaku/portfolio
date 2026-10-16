@@ -18,6 +18,7 @@ npm run build      # type check + production build
 | Case studies (copy and facts) | `src/content/work/*.md` |
 | Case study images | `public/work/<slug>/`, referenced from the Markdown |
 | BigCity demo audio | `public/audio/`, listed in `bigcityDemo.audio` in `src/site.ts` |
+| BigCity demo art (from the plugin's `assets/`) | `public/plugin/`; drawing code ported from `Source/` in `src/lib/bigcity-plugin.ts` |
 | Colours, type, spacing | `src/styles/global.css` |
 | The city itself | `src/lib/pixel-city/` |
 

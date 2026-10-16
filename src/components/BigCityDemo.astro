@@ -1,5 +1,4 @@
 ---
-import PixelCity from './PixelCity.astro';
 import { site } from '../site';
 
 const { body, audio } = site.bigcityDemo;
@@ -12,39 +11,44 @@ const hasAudio = audio.files.length > 0;
     <p class="demo-lede">{body}</p>
   </div>
 
-  <div class="panel">
-    <PixelCity id="demo-city" height="clamp(240px, 32vw, 340px)" label="Pixel skyline that grows with City size" />
-
-    <div class="controls">
-      {
-        hasAudio && (
-          <button class="btn btn-primary play" type="button" aria-pressed="false" data-play>
-            <svg class="icon-play" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path d="M6 4l10 6-10 6z" />
-            </svg>
-            <svg class="icon-pause" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <rect x="5" y="4" width="3.5" height="12" rx="1" />
-              <rect x="11.5" y="4" width="3.5" height="12" rx="1" />
-            </svg>
-            <span data-play-label>Play demo</span>
-          </button>
-        )
-      }
-
-      <div class="knob-row">
-        <div class="knob" aria-hidden="true">
-          <div class="knob-face" data-knob><span class="knob-mark"></span></div>
-        </div>
-        <div class="slider">
-          <label for="city-size">
-            <span>City size</span>
-            <output for="city-size" data-readout>50.0%</output>
-          </label>
-          <input id="city-size" type="range" min="0" max="100" step="0.5" value="50" data-size />
-        </div>
-      </div>
+  <div class="plugin" data-plugin>
+    <!-- Shown until the live editor loads (and if it can't). -->
+    <img class="plugin-poster" src="/plugin/panel.webp" alt="" width="768" height="416" loading="lazy" decoding="async" />
+    <div
+      class="hit knob-hit"
+      role="slider"
+      tabindex="0"
+      aria-label="City size"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="50"
+      aria-valuetext="50.0%"
+      data-knob
+    >
     </div>
+    <button class="hit switch-hit" type="button" aria-label="Bypass" aria-pressed="false" data-bypass></button>
+  </div>
 
+  <div class="controls">
+    {
+      hasAudio && (
+        <button class="btn btn-primary play" type="button" aria-pressed="false" data-play>
+          <svg class="icon-play" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M6 4l10 6-10 6z" />
+          </svg>
+          <svg class="icon-pause" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <rect x="5" y="4" width="3.5" height="12" rx="1" />
+            <rect x="11.5" y="4" width="3.5" height="12" rx="1" />
+          </svg>
+          <span data-play-label>Play demo</span>
+        </button>
+      )
+    }
+    <!-- On phones the knob is small, so a full-width slider mirrors it. -->
+    <label class="phone-slider">
+      <span>City size</span>
+      <input type="range" min="0" max="100" step="0.1" value="50" data-phone-size />
+    </label>
     {
       hasAudio && (
         <p class="note weak">
@@ -57,62 +61,147 @@ const hasAudio = audio.files.length > 0;
         </p>
       )
     }
-    <p class="error" role="alert" data-error hidden></p>
   </div>
+  <p class="error" role="alert" data-error hidden></p>
 </section>
 
 <script>
   import { BigCityPlayer } from '../lib/bigcity-player';
-  import type { PixelCity } from '../lib/pixel-city/scene';
+  import type { PluginEditor } from '../lib/bigcity-plugin';
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-bigcity-demo]')) {
     const audio: { files: string[]; loopSeconds: number; padSeconds: number } = JSON.parse(root.dataset.audio!);
     const player = audio.files.length ? new BigCityPlayer(audio.files, audio.loopSeconds, audio.padSeconds) : null;
-    const cityEl = root.querySelector<HTMLElement & { pixelCity?: Promise<PixelCity | null> }>('[data-pixel-city]')!;
-    const size = root.querySelector<HTMLInputElement>('[data-size]')!;
-    const readout = root.querySelector<HTMLOutputElement>('[data-readout]')!;
+    const frame = root.querySelector<HTMLElement>('[data-plugin]')!;
     const knob = root.querySelector<HTMLElement>('[data-knob]')!;
+    const bypass = root.querySelector<HTMLButtonElement>('[data-bypass]')!;
+    const phoneSize = root.querySelector<HTMLInputElement>('[data-phone-size]')!;
     const play = root.querySelector<HTMLButtonElement>('[data-play]');
     const playLabel = root.querySelector<HTMLElement>('[data-play-label]');
     const error = root.querySelector<HTMLElement>('[data-error]')!;
-    let city: PixelCity | null = null;
-    let frame = 0;
 
-    const applySize = () => {
-      const value = size.valueAsNumber / 100;
-      readout.textContent = `${size.valueAsNumber.toFixed(1)}%`;
-      knob.style.setProperty('--angle', `${-135 + value * 270}deg`);
-      player?.setSize(value);
-      city?.setCitySize(value);
-      // Like the plugin: as the city grows, the sun sets and windows light up one by one.
-      city?.setNight(value * 0.55);
+    // State lives here so the controls work before (or without) the drawn editor.
+    let value = 50;
+    let bypassed = false;
+    let editor: PluginEditor | null = null;
+
+    const applyAudio = () => player?.setSize(bypassed ? 0 : value / 100); // bypass = the dry render
+    const reflect = () => {
+      const text = `${value.toFixed(1)}%`;
+      knob.setAttribute('aria-valuenow', String(value));
+      knob.setAttribute('aria-valuetext', text);
+      phoneSize.value = String(value);
+      bypass.setAttribute('aria-pressed', String(bypassed));
     };
-    size.addEventListener('input', applySize);
-    applySize();
-
-    // The city starts lazily; hook it up whenever it's ready.
-    const waitForCity = () => {
-      if (!cityEl.pixelCity) return requestAnimationFrame(waitForCity);
-      cityEl.pixelCity.then((c) => {
-        city = c;
-        applySize();
-      });
+    const setValue = (next: number, glide = false) => {
+      value = Math.min(100, Math.max(0, Math.round(next * 10) / 10));
+      editor?.setValue(value, glide);
+      reflect();
+      applyAudio();
     };
-    waitForCity();
-
-    const pumpEnergy = () => {
-      city?.setEnergy(player?.energy() ?? 0);
-      frame = requestAnimationFrame(pumpEnergy);
+    const setBypassed = (next: boolean) => {
+      bypassed = next;
+      editor?.setBypassed(next);
+      reflect();
+      applyAudio();
     };
 
+    // --- Knob: drag (≈200 px for the full range), Shift for fine, wheel, keys, Option-click resets
+    let drag: { y: number } | null = null;
+    knob.addEventListener('pointerdown', (e) => {
+      knob.focus();
+      if (e.altKey) return setValue(50, true);
+      drag = { y: e.clientY };
+      knob.setPointerCapture(e.pointerId);
+      if (editor) { editor.press = 'knob'; editor.invalidate(); }
+    });
+    knob.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dy = drag.y - e.clientY;
+      drag.y = e.clientY;
+      setValue(value + (e.shiftKey ? 0.1 : 0.5) * dy);
+    });
+    const endDrag = () => {
+      drag = null;
+      if (editor) { editor.press = null; editor.invalidate(); }
+    };
+    knob.addEventListener('pointerup', endDrag);
+    knob.addEventListener('pointercancel', endDrag);
+
+    let trackpadBurst = 0;
+    let burstTimer = 0;
+    knob.addEventListener('wheel', (e) => {
+      e.preventDefault(); // the knob takes the scroll, not the page
+      const fine = e.shiftKey;
+      const delta = e.deltaMode === 1 ? -e.deltaY * 33 : -e.deltaY;
+      if (e.deltaMode === 1 || Math.abs(e.deltaY) >= 40) {
+        setValue(value + Math.sign(delta) * (fine ? 0.1 : 1), true); // a mouse-wheel notch
+        return;
+      }
+      // Trackpad: same distance as a drag, after an 8 px dead zone per burst.
+      clearTimeout(burstTimer);
+      burstTimer = window.setTimeout(() => (trackpadBurst = 0), 300);
+      trackpadBurst += Math.abs(delta);
+      if (trackpadBurst > 8) setValue(value + (fine ? 0.1 : 0.5) * delta);
+    }, { passive: false });
+
+    knob.addEventListener('keydown', (e) => {
+      const fine = e.shiftKey ? 0.1 : 1;
+      const steps: Record<string, number> = {
+        ArrowUp: fine, ArrowRight: fine, ArrowDown: -fine, ArrowLeft: -fine, PageUp: 10, PageDown: -10,
+      };
+      if (e.key in steps) setValue(value + steps[e.key], true);
+      else if (e.key === 'Home') setValue(0, true);
+      else if (e.key === 'End') setValue(100, true);
+      else return;
+      e.preventDefault();
+    });
+
+    // --- Switch: toggles on release, like the plugin
+    bypass.addEventListener('click', () => setBypassed(!bypassed));
+    bypass.addEventListener('pointerdown', () => { if (editor) { editor.press = 'switch'; editor.invalidate(); } });
+    bypass.addEventListener('pointerup', () => { if (editor) { editor.press = null; editor.invalidate(); } });
+
+    // Hover overlays, drawn by the editor
+    for (const [el, name] of [[knob, 'knob'], [bypass, 'switch']] as const) {
+      el.addEventListener('pointerenter', () => { if (editor) { editor.hover = name; editor.invalidate(); } });
+      el.addEventListener('pointerleave', () => { if (editor) { editor.hover = null; editor.press = null; editor.invalidate(); } });
+    }
+
+    phoneSize.addEventListener('input', () => setValue(phoneSize.valueAsNumber));
+
+    // --- Load the drawn editor only when the demo is close to the screen
+    const start = async () => {
+      try {
+        const { loadPluginAssets, PluginEditor } = await import('../lib/bigcity-plugin');
+        const assets = await loadPluginAssets();
+        editor = new PluginEditor(assets, { reducedMotion });
+        editor.setValue(value);
+        editor.setBypassed(bypassed);
+        frame.querySelector('.plugin-poster')!.after(editor.canvas); // above the poster, below the controls
+        editor.resize(frame.clientWidth);
+        new ResizeObserver(() => editor!.resize(frame.clientWidth)).observe(frame);
+        new IntersectionObserver(([entry]) => editor!.setVisible(entry.isIntersecting)).observe(frame);
+        document.addEventListener('visibilitychange', () => editor!.invalidate());
+        frame.classList.add('is-live');
+      } catch (e) {
+        console.warn('BigCity demo: keeping the static panel.', e);
+      }
+    };
+    const near = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      near.disconnect();
+      start();
+    }, { rootMargin: '600px 0px' });
+    near.observe(frame);
+
+    // --- Audio
     const setPlaying = (on: boolean) => {
       play!.setAttribute('aria-pressed', String(on));
       playLabel!.textContent = on ? 'Pause demo' : 'Play demo';
-      cancelAnimationFrame(frame);
-      if (on) pumpEnergy();
-      else city?.setEnergy(0);
     };
-
     play?.addEventListener('click', async () => {
       if (!player) return;
       error.hidden = true;
@@ -123,7 +212,7 @@ const hasAudio = audio.files.length > 0;
       playLabel!.textContent = 'Loading…';
       try {
         await player.play();
-        player.setSize(size.valueAsNumber / 100);
+        applyAudio();
         setPlaying(true);
       } catch (e) {
         console.error(e);
@@ -132,14 +221,14 @@ const hasAudio = audio.files.length > 0;
         error.hidden = false;
       }
     });
-
-    // Stop the music when the reader leaves the tab.
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden' && player?.playing) {
         void player.pause();
         setPlaying(false);
       }
     });
+
+    reflect();
   }
 </script>
 
@@ -147,57 +236,68 @@ const hasAudio = audio.files.length > 0;
   .demo { display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
   .demo-text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--xs); }
   .demo-lede { margin: 0; font-size: var(--text-lg); line-height: var(--lh-lg); }
-  .panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--m);
-    padding: var(--s);
-    border: 1px solid var(--stroke-weak);
-    border-radius: var(--radius-l);
-    background: #fff;
-  }
-  .panel :global(.city) { border-radius: var(--radius-m); }
-  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--m); }
-  .play .icon-pause, .play[aria-pressed='true'] .icon-play { display: none; }
-  .play[aria-pressed='true'] .icon-pause { display: block; }
-  @media (max-width: 599px) { .play { width: 100%; order: 2; } }
 
-  .knob-row { flex: 1 1 280px; display: flex; align-items: center; gap: var(--s); }
-  .knob {
-    flex: none;
-    width: 64px;
-    height: 64px;
-    padding: 4px;
-    border-radius: 50%;
-    background: conic-gradient(from 225deg, var(--stripe-1), var(--stripe-2) 25%, var(--lemon) 45%, var(--stripe-3) 75%, transparent 75%);
-  }
-  .knob-face {
+  /* The editor keeps the plugin's 768 × 416 proportions and its own rounded window. */
+  .plugin {
     position: relative;
+    aspect-ratio: 768 / 416;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgb(31 31 36 / 0.12), 0 12px 32px rgb(31 31 36 / 0.16);
+    touch-action: pan-y;
+  }
+  .plugin :global(canvas),
+  .plugin-poster {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    background: #f6f1e4;
-    box-shadow: inset 0 -3px 0 rgb(0 0 0 / 0.12), 0 2px 4px rgb(0 0 0 / 0.15);
-    transform: rotate(var(--angle, 0deg));
-    transition: transform 80ms linear;
   }
-  @media (prefers-reduced-motion: reduce) { .knob-face { transition: none; } }
-  .knob-mark {
-    position: absolute;
-    left: 50%;
-    top: 6px;
-    width: 4px;
-    height: 16px;
-    margin-left: -2px;
-    border-radius: 2px;
-    background: var(--text-strong);
-  }
-  .slider { flex: 1; min-width: 0; }
-  .slider label { display: flex; justify-content: space-between; font-weight: 700; }
-  output { font-variant-numeric: tabular-nums; }
-  input[type='range'] { width: 100%; height: var(--target); margin: 0; accent-color: var(--brand); cursor: pointer; }
+  .plugin :global(canvas) { opacity: 0; transition: opacity 300ms ease-out; }
+  .plugin.is-live :global(canvas) { opacity: 1; }
+  .plugin.is-live .plugin-poster { visibility: hidden; transition: visibility 0s 300ms; }
+  @media (prefers-reduced-motion: reduce) { .plugin :global(canvas) { transition: none; } }
 
-  .note { display: flex; align-items: center; gap: var(--xs); font-size: var(--text-sm); line-height: var(--lh-sm); }
+  /* Real controls over the drawn ones, in the plugin's own coordinates (as % of 768 × 416). */
+  .hit {
+    position: absolute;
+    z-index: 1;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .knob-hit {
+    left: calc(64 / 768 * 100%);
+    top: calc(176 / 416 * 100%);
+    width: calc(112 / 768 * 100%);
+    height: calc(112 / 416 * 100%);
+    border-radius: 50%;
+    cursor: ns-resize;
+    touch-action: none;
+  }
+  .switch-hit {
+    left: calc(608 / 768 * 100%);
+    top: calc(188 / 416 * 100%);
+    width: calc(128 / 768 * 100%);
+    height: calc(112 / 416 * 100%);
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .hit:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s) var(--m); }
+  .play .icon-pause, .play[aria-pressed='true'] .icon-play { display: none; }
+  .play[aria-pressed='true'] .icon-pause { display: block; }
+
+  .phone-slider { display: none; }
+  @media (max-width: 599px) {
+    .play { width: 100%; }
+    .phone-slider { display: flex; flex-direction: column; gap: 4px; width: 100%; font-weight: 700; }
+    .phone-slider input { width: 100%; height: var(--target); margin: 0; accent-color: var(--brand); }
+  }
+
+  .note { display: flex; align-items: center; gap: var(--xs); margin: 0; font-size: var(--text-sm); line-height: var(--lh-sm); }
   .note svg { flex: none; }
-  .error { color: #b42318; font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .error { margin: 0; color: #b42318; font-size: var(--text-sm); line-height: var(--lh-sm); }
 </style>
