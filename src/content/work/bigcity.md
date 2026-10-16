@@ -24,7 +24,7 @@ Music production is complex at every layer: the idea, the sound design, the soft
 Plugins are supposed to help. Too many of them are expensive, use a lot of CPU, and come with a whole new UI to learn.
 
 <figure>
-  <div class="media-placeholder">[Image: 02-early-sketch]</div>
+  <img src="/work/bigcity/02-early-sketch.webp" alt="An early BigCity concept: a scuffed cream panel with a City size knob, a pixel skyline display and an FX on/bypass switch." width="1280" height="691" loading="lazy" decoding="async">
   <figcaption>Where BigCity started.</figcaption>
 </figure>
 
@@ -44,16 +44,16 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 
 ### One knob, one job
 
-**Define the sound first.** City pop is a niche Japanese genre from the '70s and '80s, and its sheen is hard to fake. I defined “sparkle” as a high-shelf boost around 10–12 kHz (the “air” band where mixes get their shine) plus a subtle micro pitch shift. Then I mapped everything to one knob.
+**Define the sound first:** City pop is a niche Japanese genre from the '70s and '80s, and its sheen is hard to fake. I defined “sparkle” as a high-shelf boost around 10–12 kHz (the “air” band where mixes get their shine) plus a subtle micro pitch shift. Then I mapped everything to one knob.
 
-**Every position sounds good.** City size runs from 0 (LittleCity) to 100 (BigCity). At 0, your audio passes through untouched. Each knob position has a precomputed gain offset. You hear sparkle, not just a volume bump.
+**Every position sounds good:** City size runs from 0 (LittleCity) to 100 (BigCity). At 0, your audio passes through untouched. Each knob position has a precomputed gain offset. You hear sparkle, not just a volume bump.
 
 <figure>
   <img src="/work/bigcity/03-knob-mapping.webp" alt="Diagram of how City size drives three parameters at once." width="1920" height="816" loading="lazy" decoding="async">
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number.** Beta testers loved the design. They were less sold on the sound: at 50, the default, the effect was too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and picked the option that felt the best to listen to after testing on multiple speakers and headphones. The result has the same loudness and more character.
+**Tune by ear, not by number:** Beta testers loved the design. They were less sold on the sound: at 50, the default, the effect was too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and picked the option that felt the best to listen to after testing on multiple speakers and headphones. The result has the same loudness and more character.
 
 **Every feature earns its place:** No presets (one knob doesn’t need a preset browser) and no extra controls (every extra knob is a submenu waiting to happen).
 
@@ -62,7 +62,7 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 ### From wireframe to final
 
 <figure>
-  <div class="media-placeholder">[Image: 05-wireframe]</div>
+  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
   <figcaption>The first wireframe.</figcaption>
 </figure>
 
@@ -73,7 +73,12 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 
 **A skyline that shows what you hear:** A beta tester asked, “What if the dial controlled time of day too?” so I changed the design so the sun sets from midday to dusk as the city grows and the knob moves from 0 to 100. The water shimmers too (a small nod to how giddy I felt seeing that effect in Pokémon Silver on my old Game Boy).
 
-**Intentional texture:** I wanted BigCity to feel like a relic of the past and something that you would find in a vintage shop in Shimokitazawa in 2026, so I added scuffs, yellowing around the edges, and a burn-in on the number counter.
+<figure>
+  <img src="/work/bigcity/07-time-of-day.webp" alt="The skyline at City size 0 (midday), 25 (afternoon), 50 (golden hour), 75 (sunset) and 100 (dusk), with more windows lit as the city grows." width="1920" height="436" loading="lazy" decoding="async">
+  <figcaption>City size 0 to 100.</figcaption>
+</figure>
+
+**Intentional texture:** I wanted BigCity to feel like something you’d find in a vintage shop in Shimokitazawa, so I added scuffs, yellowing around the edges, and a burn-in on the number counter.
 
 **Bypass you can see:** Flip the switch and the skyline fades to grey in 200 ms: long enough to see, short enough to feel instant.
 
@@ -106,7 +111,7 @@ Nothing shipped without passing:
 - A CPU benchmark on every change (final: ~0.9% per instance on an M4 Max)
 - Apple code signing and notarization, so it installs without Gatekeeper warnings
 
-**Measure, don't guess.** With the window open, the water shimmer looked like it added 220 MB of memory. I decided if the memory stuck around after closing the window, the shimmer was out. Memory dropped from 282 MB to 67 MB the moment the window closed (the real cost came from JUCE’s macOS renderer) so the shimmer stayed.
+**Measure, don't guess:** With the window open, the water shimmer looked like it added 220 MB of memory. I decided if the memory stuck around after closing the window, the shimmer was out. Memory dropped from 282 MB to 67 MB the moment the window closed (the real cost came from JUCE’s macOS renderer) so the shimmer stayed.
 
 <figure>
   <img src="/work/bigcity/10-memory.webp" alt="Chart of plugin memory use with the window open versus closed." width="1920" height="896" loading="lazy" decoding="async">
@@ -131,8 +136,8 @@ Back to the hypothesis: one knob, and every position sounds good. The engineerin
 
 ## What I learned
 
-- **Constraints make better products.** One knob means BigCity does one thing (and hopefully does it really well).
-- **Build for people you care about.** I've been part of the producer and DJ community for years. Pay-what-you-want means anyone in it can use this.
+- **Constraints make better products:** One knob means BigCity does one thing (and hopefully does it really well).
+- **Build for people you care about:** I've been part of the producer and DJ community for years. Pay-what-you-want means anyone in it can use this.
 
 ## What's next
 

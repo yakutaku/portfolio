@@ -54,9 +54,9 @@ So we drew a clear line. Our pod owned the global shell, routing, and permission
 
 ### One fix per problem
 
-- **Make back mean back.** We fixed browser back behavior without changing a single URL, so every existing bookmark kept working.
-- **Organize by task, not product.** Card sorting showed people group by what they’re doing, not where it lives. We rebuilt the sidebar around core workflows: 1:1s, feedback, engagement, reviews, and goals.
-- **Show each role only what it can use.** Our pod owned permissions, so we hid tools people couldn’t access, like analytics for non-admins.
+- **Make back mean back:** We fixed browser back behavior without changing a single URL, so every existing bookmark kept working.
+- **Organize by task, not product:** Card sorting showed people group by what they’re doing, not where it lives. We rebuilt the sidebar around core workflows: 1:1s, feedback, engagement, reviews, and goals.
+- **Show each role only what it can use:** Our pod owned permissions, so we hid tools people couldn’t access, like analytics for non-admins.
 
 Our designer owned the visual navigation updates. I owned research, wireframing, and IA.
 
@@ -65,7 +65,7 @@ Our designer owned the visual navigation updates. I owned research, wireframing,
   <figcaption>The shipped admin nav structure, rebuilt in 2026.</figcaption>
 </figure>
 
-**Revisiting it in 2026.** The selected state mattered more than it looked. In the 2022 nav, it was a slightly lighter gray, and color-only cues disappear for colorblind users and on low-quality monitors. A bolder color would have competed with the blue reserved for clickable elements. So in my rebuild, the selected row gets three cues: a fill, a 3px bar, and semibold text. Every label on the dark rail clears WCAG AA, and you can still tell where you are in grayscale.
+**Revisiting it in 2026:** The selected state mattered more than it looked. In the 2022 nav, it was a slightly lighter gray, and color-only cues disappear for colorblind users and on low-quality monitors. A bolder color would have competed with the blue reserved for clickable elements. So in my rebuild, the selected row gets three cues: a fill, a 3px bar, and semibold text. Every label on the dark rail clears WCAG AA, and you can still tell where you are in grayscale.
 
 <figure>
   <img src="/work/lattice/05-ia-before-and-after.webp" alt="Map from the 2022 list of 13 nav items to the new structure: Everyone (Home, People), Workflows (1:1s, Feedback, Reviews, Goals, Engagement, Grow, Updates) and Admin (Reporting, Analytics, Directory, Settings), with Compensation added later in 2022." width="1440" height="1328" loading="lazy" decoding="async">
@@ -79,9 +79,9 @@ Our designer owned the visual navigation updates. I owned research, wireframing,
 
 ## What we cut
 
-- **Grouping by product suite (performance, engagement, growth).** Tech debt made it hard, and card sorting already told us people think in tasks.
-- **Collapsible sections.** An extra click for power users on every visit, and not cheap to build.
-- **Pinned favorites.** Expensive (and bookmarks already did the job).
+- **Grouping by product suite (performance, engagement, growth):** Tech debt made it hard, and card sorting already told us people think in tasks.
+- **Collapsible sections:** An extra click for power users on every visit, and not cheap to build.
+- **Pinned favorites:** Expensive (and bookmarks already did the job).
 
 <figure>
   <img src="/work/lattice/04-how-we-got-to-workflows.webp" alt="An open card sort with HR admins and employees showed people group by task. Four nav structures compared: product suites, collapsible sections and pinned favorites were dropped; workflow groups shipped." width="1440" height="1006" loading="lazy" decoding="async">
@@ -110,9 +110,9 @@ My role was eliminated in a reorg two weeks before launch. My pod later shared t
 
 ### What I learned
 
-**Protect what people already rely on.** Bookmarks looked like a symptom of bad navigation, something to design away. But for most admins, they were how work got done. Breaking them would have broken real workflows.
+**Protect what people already rely on:** Bookmarks looked like a symptom of bad navigation, something to design away. But for most admins, they were how work got done. Breaking them would have broken real workflows.
 
-**Ship within the constraints you have.** A perfect IA doesn’t matter if it can’t survive tech debt, a short timeline, and pressure from leadership. The best win was fixing the most painful problems using the resources we had.
+**Ship within the constraints you have:** A perfect IA doesn’t matter if it can’t survive tech debt, a short timeline, and pressure from leadership. The best win was fixing the most painful problems using the resources we had.
 
 ## If I had more time
 

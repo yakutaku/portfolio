@@ -67,16 +67,16 @@ Our designer owned the setup flows. I led research, strategy, flows, copy, and d
 
 ### Less tour, more doing
 
-**A role question up front.** The role quiz we included added friction at signup, but it meant every step after it was one that person could actually use.
+**A role question up front:** The role quiz we included added friction at signup, but it meant every step after it was one that person could actually use.
 
 <figure>
   <img src="/work/atspoke/s2-role-model.webp" alt="Diagram of how the role chosen at signup maps to onboarding steps." width="1920" height="1152" loading="lazy" decoding="async">
   <figcaption>The role question at signup decides which steps each person sees.</figcaption>
 </figure>
 
-**Practice, not a tour.** Instead of a feature tour, new users filed a practice ticket in their first minute, so they learned atSpoke by using it.
+**Practice, not a tour:** Instead of a feature tour, new users filed a practice ticket in their first minute, so they learned atSpoke by using it.
 
-**Every step earns its time.** Our first version was longer. In beta, people lost interest after about two minutes, so we cut anything a role didn't need, like exploring team spaces for people who mostly file tickets.
+**Every step earns its time:** Our first version was longer. In beta, people lost interest after about two minutes, so we cut anything a role didn't need, like exploring team spaces for people who mostly file tickets.
 
 ## The experience
 
@@ -178,8 +178,8 @@ Okta acquired us in Q3 2021 for ~$79M, and their leadership called out our onboa
 
 ## What I'd do differently
 
-**Choose tools for the long run, not the launch.** Pendo saved us weeks up front, but its element targeting was unreliable, and support calls and emails kept pulling me off other projects. WalkMe cost more, but it was more flexible around element targeting and had a better technical support team.
+**Choose tools for the long run, not the launch:** Pendo saved us weeks up front, but its element targeting was unreliable, and support calls and emails kept pulling me off other projects. WalkMe cost more, but it was more flexible around element targeting and had a better technical support team.
 
-**Get to customers sooner.** I'd put prototypes in front of customers sooner and run a lighter process. Direct customer feedback is worth infinitely more than the perfect spec (or in Overwatch parlance: you learn more by playing than you do researching the perfect keyboard settings for your main).
+**Get to customers sooner:** I'd put prototypes in front of customers sooner and run a lighter process. Direct customer feedback is worth infinitely more than the perfect spec (or in Overwatch parlance: you learn more by playing than you do researching the perfect keyboard settings for your main).
 
 <p class="credit">Visuals reconstructed from the original design spec.</p>
