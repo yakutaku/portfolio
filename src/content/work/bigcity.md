@@ -59,11 +59,11 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 
 ## The experience
 
-### From wireframe to final
+### From first pass to final
 
 <figure>
   <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
-  <figcaption>The first wireframe.</figcaption>
+  <figcaption>The first pass.</figcaption>
 </figure>
 
 <figure>
