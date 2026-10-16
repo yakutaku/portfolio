@@ -24,7 +24,7 @@ Music production is complex at every layer: the idea, the sound design, the soft
 Plugins are supposed to help. Too many of them are expensive, use a lot of CPU, and come with a whole new UI to learn.
 
 <figure>
-  <img src="/work/bigcity/02-early-sketch.webp" alt="An early BigCity concept: a scuffed cream panel with a City size knob, a pixel skyline display and an FX on/bypass switch." width="1280" height="691" loading="lazy" decoding="async">
+  <img src="/work/bigcity/02-early-sketch.webp" alt="An early BigCity concept: a light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1516" height="796" loading="lazy" decoding="async">
   <figcaption>Where BigCity started.</figcaption>
 </figure>
 
@@ -62,7 +62,7 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 ### From first pass to final
 
 <figure>
-  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1534" height="808" loading="lazy" decoding="async">
+  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
   <figcaption>The first pass.</figcaption>
 </figure>
 

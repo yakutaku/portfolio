@@ -111,6 +111,7 @@ const hasAudio = audio.files.length > 0;
     // --- Knob: drag (≈200 px for the full range), Shift for fine, wheel, keys, Option-click resets
     let drag: { y: number } | null = null;
     knob.addEventListener('pointerdown', (e) => {
+      e.preventDefault(); // dragging shouldn't select the panel
       knob.focus();
       if (e.altKey) return setValue(50, true);
       drag = { y: e.clientY };
@@ -245,6 +246,8 @@ const hasAudio = audio.files.length > 0;
     overflow: hidden;
     box-shadow: 0 1px 2px rgb(31 31 36 / 0.12), 0 12px 32px rgb(31 31 36 / 0.16);
     touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
   }
   .plugin :global(canvas),
   .plugin-poster {
@@ -297,7 +300,8 @@ const hasAudio = audio.files.length > 0;
     .phone-slider input { width: 100%; height: var(--target); margin: 0; accent-color: var(--brand); }
   }
 
-  .note { display: flex; align-items: center; gap: var(--xs); margin: 0; font-size: var(--text-sm); line-height: var(--lh-sm); }
-  .note svg { flex: none; }
+  /* .controls raises specificity above the case study's paragraph margin, which pushed the note up. */
+  .controls .note { display: flex; align-items: center; gap: var(--xs); margin: 0; font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .controls .note svg { flex: none; }
   .error { margin: 0; color: #b42318; font-size: var(--text-sm); line-height: var(--lh-sm); }
 </style>
