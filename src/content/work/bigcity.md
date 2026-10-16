@@ -62,7 +62,7 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 ### From first pass to final
 
 <figure>
-  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
+  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1534" height="808" loading="lazy" decoding="async">
   <figcaption>The first pass.</figcaption>
 </figure>
 
