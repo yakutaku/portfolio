@@ -6,7 +6,7 @@ export const site = {
   title: 'Designer',
   url: 'https://jonathanday.vercel.app',
   /** Shown in search results and link previews. */
-  description: 'I make complex products feel good to use',
+  description: 'I make complex products feel great to use',
   email: 'jyday@proton.me',
   links: {
     linkedin: 'https://www.linkedin.com/in/-jonathanday/',
@@ -15,7 +15,7 @@ export const site = {
     gumroad: 'https://sunshoweraudio.gumroad.com/l/bigcity',
   },
   home: {
-    headline: 'I make complex products feel good to use',
+    headline: 'I make complex products feel great to use',
     /** Optional line beside the headline; leave empty to hide it. */
     intro: '',
     readLabel: 'Read',
@@ -41,7 +41,7 @@ export const site = {
   },
   about: {
     paragraphs: [
-      'Hi, I’m Jonathan. I’m a product designer and builder. For the last 10 years, I’ve been learning how to make complex products feel great to use.',
+      'Hi, I’m Jonathan. I’m a product designer who spent the last 10 years learning how to make things that feel great to use.',
       'Outside of work, I make electronic music and DJ around SoCal and NYC.',
     ],
   },

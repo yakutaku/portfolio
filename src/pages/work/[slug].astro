@@ -227,7 +227,8 @@ const d = entry.data;
   .prose :global(blockquote p) { margin: 0; }
 
   .prose :global(figure) { margin: var(--xl) 0; }
-  .prose :global(figure img) {
+  .prose :global(figure img),
+  .prose :global(figure video) {
     width: 100%;
     height: auto;
     border-radius: var(--radius-m);

@@ -29,6 +29,12 @@ const hasAudio = audio.files.length > 0;
     <button class="hit switch-hit" type="button" aria-label="Bypass" aria-pressed="false" data-bypass></button>
   </div>
 
+  <!-- First-visit hints; each one leaves after its control is first used. The controls carry their own labels. -->
+  <div class="hints" aria-hidden="true">
+    <span class="hint hint-knob" data-hint-knob>Drag up or down</span>
+    <span class="hint hint-switch" data-hint-switch>Flip to compare</span>
+  </div>
+
   <div class="controls">
     {
       hasAudio && (
@@ -81,6 +87,12 @@ const hasAudio = audio.files.length > 0;
     const play = root.querySelector<HTMLButtonElement>('[data-play]');
     const playLabel = root.querySelector<HTMLElement>('[data-play-label]');
     const error = root.querySelector<HTMLElement>('[data-error]')!;
+    const hintKnob = root.querySelector<HTMLElement>('[data-hint-knob]')!;
+    const hintSwitch = root.querySelector<HTMLElement>('[data-hint-switch]')!;
+    const dismiss = (hint: HTMLElement) => hint.classList.add('is-dismissed');
+    for (const type of ['pointerdown', 'keydown', 'wheel']) knob.addEventListener(type, () => dismiss(hintKnob));
+    phoneSize.addEventListener('input', () => dismiss(hintKnob));
+    bypass.addEventListener('click', () => dismiss(hintSwitch));
 
     // State lives here so the controls work before (or without) the drawn editor.
     let value = 50;
@@ -236,7 +248,7 @@ const hasAudio = audio.files.length > 0;
 <style>
   .demo { display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
   .demo-text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--xs); }
-  .demo-lede { margin: 0; font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .demo-text .demo-lede { margin: 0; /* beats the case study paragraph margin */ font-size: var(--text-lg); line-height: var(--lh-lg); }
 
   /* The editor keeps the plugin's 768 × 416 proportions and its own rounded window. */
   .plugin {
@@ -288,6 +300,41 @@ const hasAudio = audio.files.length > 0;
     cursor: pointer;
   }
   .hit:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+  /* Hints sit under the plugin, centred on the control they describe (plugin coordinates, as % of 768). */
+  .hints { position: relative; height: 36px; margin-top: calc(var(--s) - var(--m)); }
+  .hint {
+    position: absolute;
+    top: 6px;
+    padding: 2px 10px;
+    border: 1px solid var(--stroke-weak);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text-weak);
+    font-size: 14px;
+    line-height: 22px;
+    white-space: nowrap;
+    transition: opacity 200ms ease-out, visibility 0s;
+  }
+  .hint::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-top: 1px solid var(--stroke-weak);
+    border-left: 1px solid var(--stroke-weak);
+    transform: rotate(45deg);
+  }
+  .hint-knob { left: calc(120 / 768 * 100%); transform: translateX(-50%); }
+  .hint-switch { left: min(calc(632 / 768 * 100%), calc(100% - 62px)); transform: translateX(-50%); } /* stays on screen when narrow */
+  .hint.is-dismissed { opacity: 0; visibility: hidden; transition: opacity 200ms ease-out, visibility 0s 200ms; }
+  @media (prefers-reduced-motion: reduce) { .hint, .hint.is-dismissed { transition: none; } }
+  @media (max-width: 599px) {
+    .hint-knob { display: none; } /* phones get the City size slider instead */
+  }
 
   .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s) var(--m); }
   .play .icon-pause, .play[aria-pressed='true'] .icon-play { display: none; }

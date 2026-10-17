@@ -17,7 +17,7 @@ demo: true
 
 ## The problem
 
-### Submenus all the way down
+### Lost in the menus
 
 Music production is complex at every layer: the idea, the sound design, the software itself. I've lost hours in submenus of submenus chasing a sound that plays for 1.5 seconds (and that most listeners will never notice).
 
@@ -34,7 +34,7 @@ Plugins are supposed to help. Too many of them are expensive, use a lot of CPU, 
 
 ### Too expensive, too heavy, too deep
 
-I talked to 10+ producers across backgrounds and skill levels. The same three complaints kept coming up:
+I talked to 10+ producers across backgrounds and skill levels. Nobody asked for more features. They asked for less:
 
 - **Too expensive:** $100–200 for one texture stings after spending $400+ on a DAW.
 - **Too heavy:** Bedroom producers often run older MacBooks that choke on long plugin chains.
@@ -46,16 +46,16 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
 
 **Define the sound first:** City pop is a niche Japanese genre from the '70s and '80s, and its sheen is hard to fake. I defined “sparkle” as a high-shelf boost around 10–12 kHz (the “air” band where mixes get their shine) plus a subtle micro pitch shift. Then I mapped everything to one knob.
 
-**Every position sounds good:** City size runs from 0 (LittleCity) to 100 (BigCity). At 0, your audio passes through untouched. Each knob position has a precomputed gain offset. You hear sparkle, not just a volume bump.
+**Every position sounds good:** City size runs from 0 (LittleCity) to 100 (BigCity). At 0, your audio passes through untouched. Each knob position has a precomputed gain offset for loudness compensation, so you hear sparkle, not just a volume bump.
 
 <figure>
   <img src="/work/bigcity/03-knob-mapping.webp" alt="Diagram of how City size drives three parameters at once." width="1920" height="816" loading="lazy" decoding="async">
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number:** Beta testers loved the design. They were less sold on the sound: at 50, the default, the effect was too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and picked the option that felt the best to listen to after testing on multiple speakers and headphones. The result has the same loudness and more character.
+**Tune by ear, not by number:** In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. The result has the same loudness and more character.
 
-**Every feature earns its place:** No presets (one knob doesn’t need a preset browser) and no extra controls (every extra knob is a submenu waiting to happen).
+**Nothing else on the panel:** No presets (one knob doesn’t need a preset browser) and no extra controls (every extra knob is a submenu waiting to happen).
 
 ## The experience
 
@@ -71,7 +71,12 @@ I talked to 10+ producers across backgrounds and skill levels. The same three co
   <figcaption>BigCity 1.0.</figcaption>
 </figure>
 
-**A skyline that shows what you hear:** A beta tester asked, “What if the dial controlled time of day too?” so I changed the design so the sun sets from midday to dusk as the city grows and the knob moves from 0 to 100. The water shimmers too (a small nod to how giddy I felt seeing that effect in Pokémon Silver on my old Game Boy).
+<figure>
+  <video src="/work/bigcity/11-demo.mp4" poster="/work/bigcity/11-demo-poster.webp" width="1536" height="832" controls preload="none" playsinline></video>
+  <figcaption>City size from 0 to 100, then bypass on and off. Sound on.</figcaption>
+</figure>
+
+**A skyline that shows what you hear:** A beta tester asked, “What if the dial controlled time of day too?” I changed the design so the sun sets from midday to dusk as the city grows and the knob moves from 0 to 100. The water shimmers too (a small nod to how giddy I felt seeing that effect in Pokémon Silver on my old Game Boy).
 
 <figure>
   <img src="/work/bigcity/07-time-of-day.webp" alt="The skyline at City size 0 (midday), 25 (afternoon), 50 (golden hour), 75 (sunset) and 100 (dusk), with more windows lit as the city grows." width="1920" height="436" loading="lazy" decoding="async">
@@ -122,7 +127,7 @@ Nothing shipped without passing:
 
 I wrote the spec, designed BigCity in Figma, and chose the architecture. Claude Code explained JUCE and wrote first-draft code, which I reviewed and tested in real-time.
 
-But AI also can't listen like humans. Parameters jumped in steps instead of gliding, so sweeping the knob sounded stepped and robotic. I caught it through ear testing on multiple speakers and headphones and smoothed each parameter so it glides between values.
+But AI also can't listen like humans. Parameters jumped in steps instead of gliding, so sweeping the knob caused zipper noise: that stepped, robotic sound. I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so each one glides between values.
 
 Claude Code was great for v1.0 but it’s no substitute for judgment in a niche this specific.
 
@@ -132,12 +137,14 @@ Claude Code was great for v1.0 but it’s no substitute for judgment in a niche 
 
 BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on October 13, 2026, as pay-what-you-want, including $0. It's a small part of making a good song, so I wanted newer producers to be able to use it.
 
+Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.”
+
 Back to the hypothesis: one knob, and every position sounds good. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
 
 ## What I learned
 
-- **Constraints make better products:** One knob means BigCity does one thing (and hopefully does it really well).
-- **Build for people you care about:** I've been part of the producer and DJ community for years. Pay-what-you-want means anyone in it can use this.
+- **Tune by ear, not by number:** The default looked right on paper, but you don't know what sounds good until you test it on multiple systems.
+- **Choose performance-friendly aesthetics:** Shimmers are a nice touch, but a pretty design that takes forever to load doesn't help producers make a better track.
 
 ## What's next
 
