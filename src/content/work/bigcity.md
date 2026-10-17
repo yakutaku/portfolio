@@ -144,7 +144,7 @@ Back to the hypothesis: one knob, and every position sounds good. The engineerin
 ## What I learned
 
 - **Tune by ear, not by number:** The default looked right on paper, but you don't know what sounds good until you test it on multiple systems.
-- **Choose performance-friendly aesthetics:** Shimmers are a nice touch, but a pretty design that takes forever to load doesn't help producers make a better track.
+- **Measure before you cut:** The shimmer looked like it cost 220 MB of memory, but the real cost came from JUCE's macOS renderer, so the shimmer stayed. A pretty detail is fine as long as it doesn't slow producers down.
 
 ## What's next
 

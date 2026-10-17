@@ -55,7 +55,10 @@ const isCurrent = (href: string) =>
     <main id="main">
       <slot />
     </main>
-    <footer class="container site-footer weak">© {new Date().getFullYear()} {site.name}</footer>
+    <footer class="container site-footer weak">
+      <span>© {new Date().getFullYear()} {site.name}</span>
+      <span>Designed and built by me with Claude Code. Astro, WebGPU, Web Audio, hosted on Vercel.</span>
+    </footer>
   </body>
 </html>
 
@@ -102,6 +105,10 @@ const isCurrent = (href: string) =>
     nav a { padding: 0 var(--s); }
   }
   .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--xs) var(--m);
     padding-block: var(--l) var(--xl);
     border-top: 1px solid var(--stroke-weak);
     font-size: var(--text-sm);
