@@ -6,7 +6,7 @@ export const site = {
   title: 'Designer',
   url: 'https://jonathanday.vercel.app',
   /** Shown in search results and link previews. */
-  description: 'I make complex products feel great to use',
+  description: 'I design and build software that feels like an instrument',
   email: 'jyday@proton.me',
   links: {
     linkedin: 'https://www.linkedin.com/in/-jonathanday/',
@@ -15,7 +15,7 @@ export const site = {
     gumroad: 'https://sunshoweraudio.gumroad.com/l/bigcity',
   },
   home: {
-    headline: 'I make complex products feel great to use',
+    headline: 'I design and build software that feels like an instrument',
     /** Optional line beside the headline; leave empty to hide it. */
     intro: '',
   },
