@@ -16,21 +16,32 @@ const { entry, next } = Astro.props;
 const { Content, headings } = await render(entry);
 const sections = headings.filter((h) => h.depth === 2);
 const d = entry.data;
+// "atSpoke (acquired by Okta)" → "atSpoke": the breadcrumb only needs the name.
+const crumb = d.client.replace(/\s*\(.*\)$/, '');
 ---
 
 <Base title={d.title} description={d.summary ?? d.tldr} image={d.cover}>
   <article class="container">
-    <a class="back" href="/#work-heading">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <path d="M16 10H4M9 5l-5 5 5 5"></path>
-      </svg>
-      Back
-    </a>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/#work-heading">Work</a></li>
+        <li aria-current="page">{crumb}</li>
+      </ol>
+    </nav>
 
     <header class="head">
-      <p class="eyebrow weak">{d.client} // {d.years}</p>
       <h1>{d.title}</h1>
       <p class="summary"><strong>TL;DR:</strong> {d.tldr}</p>
+      {
+        d.demo && (
+          <a class="jump" href="#demo">
+            Try the demo
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M10 4v12M5 11l5 5 5-5"></path>
+            </svg>
+          </a>
+        )
+      }
     </header>
 
     <dl class="facts">
@@ -150,9 +161,13 @@ const d = entry.data;
 </script>
 
 <style>
-  .back { display: inline-flex; align-items: center; gap: var(--xs); min-height: var(--target); margin-top: var(--l); }
-  .head { display: flex; flex-direction: column; gap: var(--s); padding-block: var(--l) var(--xl); max-width: 880px; }
-  .eyebrow { font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .crumbs { margin-top: var(--l); font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .crumbs ol { display: flex; flex-wrap: wrap; align-items: center; margin: 0; padding: 0; list-style: none; }
+  .crumbs li { display: flex; align-items: center; color: var(--text-weak); }
+  .crumbs li + li::before { content: '/' / ''; margin-inline: var(--xs); color: var(--stroke-strong); }
+  .crumbs a { display: inline-flex; align-items: center; min-height: var(--target); }
+  .head { display: flex; flex-direction: column; gap: var(--s); padding-block: var(--s) var(--xl); max-width: 880px; }
+  .jump { display: inline-flex; align-self: flex-start; align-items: center; gap: var(--xs); min-height: var(--target); }
   h1 { font-size: clamp(37px, 4.2vw, 54px); line-height: 1.18; letter-spacing: -0.025em; }
   .summary { max-width: 720px; margin-top: var(--xs); font-size: var(--text-lg); line-height: var(--lh-lg); }
 

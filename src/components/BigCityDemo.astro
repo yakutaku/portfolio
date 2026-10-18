@@ -5,7 +5,7 @@ const { body, audio } = site.bigcityDemo;
 const hasAudio = audio.files.length > 0;
 ---
 
-<section class="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-label="BigCity demo">
+<section class="demo" id="demo" data-bigcity-demo data-audio={JSON.stringify(audio)} aria-label="BigCity demo">
   <div class="demo-text">
     <span class="tag">Demo</span>
     <p class="demo-lede">{body}</p>
@@ -246,7 +246,7 @@ const hasAudio = audio.files.length > 0;
 </script>
 
 <style>
-  .demo { display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
+  .demo { scroll-margin-top: var(--m); display: flex; flex-direction: column; gap: var(--m); margin-block: var(--xl); }
   .demo-text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--xs); }
   .demo-text .demo-lede { margin: 0; /* beats the case study paragraph margin */ font-size: var(--text-lg); line-height: var(--lh-lg); }
 

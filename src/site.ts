@@ -18,7 +18,6 @@ export const site = {
     headline: 'I make complex products feel great to use',
     /** Optional line beside the headline; leave empty to hide it. */
     intro: '',
-    readLabel: 'Read',
   },
   bigcityDemo: {
     body: 'Why read more about BigCity when you can just play with it instead – try it out below!',
