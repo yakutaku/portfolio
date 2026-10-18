@@ -90,6 +90,26 @@ const { home } = site;
     text-decoration: none;
   }
   .work-row:hover { color: var(--text-strong); }
+  /* The whole row is one link, so hover lights up the whole row: a soft panel, a blue title, the arrow nudges. */
+  .work-row { position: relative; isolation: isolate; }
+  .work-row::before {
+    content: '';
+    position: absolute;
+    inset: var(--s) calc(-1 * var(--s));
+    z-index: -1;
+    border-radius: var(--radius-l);
+    background: var(--fill-hover);
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+  .work-row h3 { transition: color 200ms ease-out; }
+  @media (hover: hover) {
+    .work-row:hover::before { opacity: 1; }
+    .work-row:hover h3 { color: var(--brand); }
+  }
+  .work-row:focus-visible::before { opacity: 1; }
+  .work-row:focus-visible h3 { color: var(--brand); }
+  @media (prefers-reduced-motion: reduce) { .work-row::before, .work-row h3 { transition: none; } }
   .work-row > :global(.cover) {
     flex: 1 1 360px;
     max-width: 560px;
