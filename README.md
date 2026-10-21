@@ -1,5 +1,7 @@
 # jonathanday.vercel.app
 
+[![Build](https://github.com/yakutaku/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/yakutaku/portfolio/actions/workflows/ci.yml)
+
 My design portfolio: three case studies and a playable demo of BigCity, a one-knob audio plugin I designed and shipped.
 
 ![The home page: a pixel-art city skyline over water, with Jonathan Day's name and headline.](public/og.png)

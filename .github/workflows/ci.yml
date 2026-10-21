@@ -1,0 +1,20 @@
+# Type-checks and builds the site on every push and pull request.
+# Vercel deploys separately; this is the green check next to each commit.
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build # astro check (types) + astro build
