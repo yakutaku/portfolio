@@ -1,6 +1,22 @@
-# Portfolio
+# jonathanday.vercel.app
 
-Astro site with a real-time pixel city (three.js, WebGPU with WebGL2 fallback).
+[One line in your words: what this site is.]
+
+![The home page: a pixel-art city skyline over water, with Jonathan Day's name and headline.](public/og.png)
+
+**Live:** https://jonathanday.vercel.app
+
+## What's in here
+
+- **Pixel city hero** (`src/lib/pixel-city/`): three.js with WebGPU (TSL shaders), falling back to WebGL2 if the first WebGPU frame fails. Loads only on the home page, after a static poster image. Scrolling moves it toward night, clicking the water sends ripples, and it holds still for people who've turned on reduced motion.
+- **BigCity demo** (`src/lib/bigcity-plugin.ts`, `src/components/BigCityDemo.astro`): the plugin's real interface, ported from its JUCE C++ source to Canvas 2D: knob, skyline keyframes, lit windows, water shimmer, seven-segment readout and bypass fade. Real HTML controls sit over the drawn ones, so it works with a keyboard, a screen reader and touch.
+- **Demo audio** (`src/lib/bigcity-player.ts`): Web Audio plays five renders of the same loop, one per City size step, and crossfades between them with equal-power gains as the knob moves.
+- **Split-flap metrics** on the Lattice case study.
+- **Accessibility:** every page passes axe with no violations, every control works by keyboard, and touch targets are at least 48 px.
+
+## How it was built
+
+Designed in Figma, built with Claude Code. [A line or two in your words on your part: the decisions you made and what you reviewed and tested.]
 
 ## Run it
 
@@ -22,5 +38,4 @@ npm run build      # type check + production build
 | Colours, type, spacing | `src/styles/global.css` |
 | The city itself | `src/lib/pixel-city/` |
 
-Images in Markdown: `![Alt text](/work/atspoke/onboarding.png)`.
 The BigCity demo appears wherever `bigcity.md` contains `<div data-demo></div>`.
