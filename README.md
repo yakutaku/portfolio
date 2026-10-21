@@ -1,6 +1,6 @@
 # jonathanday.vercel.app
 
-[One line in your words: what this site is.]
+My design portfolio: three case studies and a playable demo of BigCity, a one-knob audio plugin I designed and shipped.
 
 ![The home page: a pixel-art city skyline over water, with Jonathan Day's name and headline.](public/og.png)
 
@@ -16,7 +16,7 @@
 
 ## How it was built
 
-Designed in Figma, built with Claude Code. [A line or two in your words on your part: the decisions you made and what you reviewed and tested.]
+Designed in Figma and built with Claude Code. I made the design and product decisions, chose the stack, wrote the copy, and reviewed every change on the live site before it shipped. Claude Code wrote most of the implementation, which is why most commits are authored by Claude.
 
 ## Run it
 
