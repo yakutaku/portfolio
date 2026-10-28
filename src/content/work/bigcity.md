@@ -25,11 +25,7 @@ demo: true
     <p class="solari" data-solari>&lt;1%</p>
     <p class="metric-label">CPU per instance</p>
   </div>
-  <div class="metric">
-    <p class="solari" data-solari>124</p>
-    <p class="metric-label">Automated tests, plus pluginval at its strictest level</p>
-  </div>
-  <figcaption>Launched October 2026. Used by Unknown Caller and producers who work with touring electronic acts.</figcaption>
+  <figcaption>Launched October 2026. Used by Unknown Caller and other touring electronic artists.</figcaption>
 </figure>
 
 ## The problem
