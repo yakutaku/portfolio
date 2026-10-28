@@ -6,14 +6,31 @@ role: "Design engineer (solo)"
 team: "Me (plus several producers as beta testers)"
 timeline: "Sep – Oct 2026"
 tldr: "I designed and built BigCity, a plugin that adds city pop sparkle to any track at <1% CPU."
-order: 1
+order: 3
 cover: "/work/bigcity/01-cover.webp"
 coverRatio: "16 / 9"
 coverAlt: "BigCity: the air and leisure of city pop, available with the twist of a knob. The plugin shows a City size knob set to 50 and a pixel skyline at sunset."
 tint: peach
 tag: "Demo"
+links:
+  - label: "Get it on Gumroad"
+    href: "https://sunshoweraudio.gumroad.com/l/bigcity"
+  - label: "View the code"
+    href: "https://github.com/yakutaku/BigCity"
 demo: true
 ---
+
+<figure class="metrics lead">
+  <div class="metric">
+    <p class="solari" data-solari>&lt;1%</p>
+    <p class="metric-label">CPU per instance</p>
+  </div>
+  <div class="metric">
+    <p class="solari" data-solari>124</p>
+    <p class="metric-label">Automated tests, plus pluginval at its strictest level</p>
+  </div>
+  <figcaption>Launched October 2026. Used by Unknown Caller and producers who work with touring electronic acts.</figcaption>
+</figure>
 
 ## The problem
 
@@ -99,6 +116,8 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
 ## Build
 
 ### One click and you're deleted
+
+<p class="pull">Modern plugins are CPU-hungry, and on older machines that means clicks, pops, and dropouts mid-session, forcing producers to freeze and flatten tracks just to keep working. Every extra step pulls them out of creative flow.</p>
 
 Real-time audio is unforgiving. One click, pop, or crash and a producer decides your plugin isn't worth it.
 

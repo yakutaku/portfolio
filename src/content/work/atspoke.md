@@ -6,30 +6,29 @@ role: "Designer + PM"
 team: "Me (in-product onboarding design), 1 designer (integrations setup), 1 tech lead, 3 engineers"
 timeline: "3 months (Jan – Mar 2021)"
 tldr: "I designed and shipped self-serve onboarding that cut onboarding time in half and took free-to-paid conversion from near zero to 16% for people who finished it."
-order: 2
+order: 1
 cover: "/work/atspoke/00-cover.webp"
 coverAlt: "atSpoke's self-serve onboarding flow."
 tint: mint
 ---
 
-## How to make onboarding worthwhile
-
-### Less tour, more doing
-
-**A role question up front:** The role quiz we included added friction at signup, but it meant every step after it was one that person could actually use.
-
-<figure>
-  <img src="/work/atspoke/s2-role-model.webp" alt="Diagram of how the role chosen at signup maps to onboarding steps." width="1920" height="1152" loading="lazy" decoding="async">
-  <figcaption>The role question at signup decides which steps each person sees.</figcaption>
+<figure class="metrics lead">
+  <div class="metric">
+    <p class="solari" data-solari>-50%</p>
+    <p class="metric-label">Onboarding time</p>
+  </div>
+  <div class="metric">
+    <p class="solari" data-solari>16%</p>
+    <p class="metric-label">Free-to-paid conversion for people who finished onboarding, up from near zero</p>
+  </div>
+  <figcaption>Launched March 2021. Okta acquired atSpoke later that year and called out the onboarding.</figcaption>
 </figure>
-
-**Practice, not a tour:** Instead of a feature tour, new users filed a practice ticket in their first minute, so they learned atSpoke by using it.
-
-**Every step earns its time:** Our first version was longer. In beta, people lost interest after about two minutes, so we cut anything a role didn't need, like exploring team spaces for people who mostly file tickets.
 
 ## The problem
 
 ### White glove for some, empty rooms for everyone else
+
+<p class="pull">A blank screen is the least welcoming place on the internet, especially in a product this powerful.</p>
 
 Anyone who signed up for atSpoke on their own landed in empty states with zero guidance. 38% of self-serve customers gave us a low CSAT score, and many took over a month to file their first ticket.
 
@@ -59,6 +58,40 @@ For research, I also recorded myself onboarding into other SaaS products (Jira, 
 - Respected people's time and attention
 - Taught skills in context
 - Never made people fight to learn the basics
+
+## Iterations
+
+### From 18 steps to 6
+
+My first version tried to teach everything. I assumed IT and HR managers wanted thorough training. The tour ran 18 steps and covered the whole product: every sidebar section, request types, ticket actions, settings, team spaces and connecting a knowledge base.
+
+<figure class="pair">
+  <img src="/work/atspoke/v1-tour-step-2.webp" alt="Version 1 of the tour, step 2 of 18: a tooltip over an empty inbox introducing team spaces." width="1920" height="1200" loading="lazy" decoding="async">
+  <img src="/work/atspoke/v1-tour-step-5.webp" alt="Version 1 of the tour, step 5 of 18: a tooltip introducing the analytics dashboard." width="1920" height="1200" loading="lazy" decoding="async">
+  <figcaption>Version 1, reconstructed: steps 2 and 5 of 18.</figcaption>
+</figure>
+
+Customer interviews showed the opposite. Users were too busy for a long tour and wanted to learn quickly, so I rebuilt it around the three aha moments.
+
+<figure>
+  <img src="/work/atspoke/s6-iterations.webp" alt="Three versions of onboarding. Version 1, teach everything: 18 steps, failed because users were too busy for a long tour. Version 2, focus on aha moments: 7 steps tailored to each role, failed because people lost interest after about 2 minutes. Version 3, core actions with no fluff: 6 steps, onboarding time dropped by half." width="1920" height="1163" loading="lazy" decoding="async">
+  <figcaption>Version 3 runs 4 to 7 steps depending on role, and 6 for team admins.</figcaption>
+</figure>
+
+## How to make onboarding worthwhile
+
+### Less tour, more doing
+
+**A role question up front:** The role quiz we included added friction at signup, but it meant every step after it was one that person could actually use.
+
+<figure>
+  <img src="/work/atspoke/s2-role-model.webp" alt="Diagram of how the role chosen at signup maps to onboarding steps." width="1920" height="1152" loading="lazy" decoding="async">
+  <figcaption>The role question at signup decides which steps each person sees.</figcaption>
+</figure>
+
+**Practice, not a tour:** Instead of a feature tour, new users filed a practice ticket in their first minute, so they learned atSpoke by using it.
+
+**Every step earns its time:** Version 2 was still too long. In beta, people lost interest after about two minutes, so we cut anything a role didn't need, like exploring team spaces for people who mostly file tickets.
 
 ## Build
 

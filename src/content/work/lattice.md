@@ -5,12 +5,24 @@ years: "2022"
 role: "Designer + PM"
 team: "Me (IA, research, wireframing), 1 designer (visual navigation updates), 1 tech lead, 2 engineers"
 timeline: "3 months (Jun – Aug 2022)"
-tldr: "I led research and IA for Lattice’s navigation overhaul as it grew from a few disparate products into an all-in-one HR platform. Navigation CSAT increased by 15 points and time to open a review (a core action) decreased by 20%."
-order: 3
+tldr: "I led research and IA for Lattice’s navigation overhaul as it grew from a few disparate products into an all-in-one HR platform. Navigation CSAT increased by 15% and time to open a review (a core action) decreased by 20%."
+order: 2
 cover: "/work/lattice/01-cover.webp"
 coverAlt: "Lattice's 2022 side navigation, a long list of 13 tools, fading behind the redesigned navigation grouped into everyday workflows and an admin section."
 tint: lilac
 ---
+
+<figure class="metrics lead">
+  <div class="metric">
+    <p class="solari" data-solari>+15%</p>
+    <p class="metric-label">Navigation CSAT after launch</p>
+  </div>
+  <div class="metric">
+    <p class="solari" data-solari>20%</p>
+    <p class="metric-label">Faster to open a review</p>
+  </div>
+  <figcaption>Results from the first quarter after launch.</figcaption>
+</figure>
 
 ## The problem
 
@@ -94,19 +106,7 @@ The selected state mattered more than it looked. In the 2022 nav, it was a sligh
 
 ### Smoother navigation, faster reviews
 
-My role was eliminated in a reorg two weeks before launch. My pod later shared the results from the first quarter after launch. Navigation CSAT, measured through an in-app survey, increased by 15 points. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
-
-<figure class="metrics">
-  <div class="metric">
-    <p class="solari" data-solari>+15</p>
-    <p class="metric-label">Navigation CSAT points after launch</p>
-  </div>
-  <div class="metric">
-    <p class="solari" data-solari>20%</p>
-    <p class="metric-label">Faster to open a review</p>
-  </div>
-  <figcaption>Results from the first quarter after launch.</figcaption>
-</figure>
+My role was eliminated in a reorg two weeks before launch. My pod later shared the results from the first quarter after launch. Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
 
 ## Reflection
 

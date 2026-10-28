@@ -24,6 +24,8 @@ const work = defineCollection({
     /** Pastel behind the cover; also used for the placeholder. */
     tint: z.enum(['mint', 'lilac', 'peach', 'lemon']),
     tag: z.string().optional(),
+    /** Buttons under the TL;DR, e.g. where to get it and the code. The first is the primary one. */
+    links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     /** Embeds the BigCity demo where the body contains <div data-demo></div>. */
     demo: z.boolean().default(false),
   }),

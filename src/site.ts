@@ -21,6 +21,7 @@ export const site = {
   },
   bigcityDemo: {
     body: 'Why read more about BigCity when you can just play with it instead – try it out below!',
+    howTo: 'Press Play, drag the knob, then flip the switch to compare.',
     /**
      * One loop per City size step, all the same length and start point.
      * Each file is padded with `padSeconds` of wrapped audio on both ends (see README).

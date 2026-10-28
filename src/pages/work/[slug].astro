@@ -33,6 +33,15 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
       <h1>{d.title}</h1>
       <p class="summary"><strong>TL;DR:</strong> {d.tldr}</p>
       {
+        d.links.length > 0 && (
+          <div class="head-links btn-stack">
+            {d.links.map((link, i) => (
+              <a class:list={['btn', i === 0 ? 'btn-primary' : 'btn-secondary']} href={link.href}>{link.label}</a>
+            ))}
+          </div>
+        )
+      }
+      {
         d.demo && (
           <a class="jump" href="#demo">
             Try the demo
@@ -98,7 +107,7 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
   if (demo && slot) slot.replaceWith(demo);
 
   // Split-flap (Solari) boards: each character flips through the deck and lands on its value.
-  const DECK = ' +-0123456789%';
+  const DECK = ' +-<.0123456789%';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (const board of document.querySelectorAll<HTMLElement>('[data-solari]')) {
     const value = board.textContent!.trim();
@@ -167,6 +176,7 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
   .crumbs li + li::before { content: '/' / ''; margin-inline: var(--xs); color: var(--stroke-strong); }
   .crumbs a { display: inline-flex; align-items: center; min-height: var(--target); }
   .head { display: flex; flex-direction: column; gap: var(--s); padding-block: var(--s) var(--xl); max-width: 880px; }
+  .head-links { display: flex; flex-wrap: wrap; gap: var(--s); margin-top: var(--xs); }
   .jump { display: inline-flex; align-self: flex-start; align-items: center; gap: var(--xs); min-height: var(--target); }
   h1 { font-size: clamp(37px, 4.2vw, 54px); line-height: 1.18; letter-spacing: -0.025em; }
   .summary { max-width: 720px; margin-top: var(--xs); font-size: var(--text-lg); line-height: var(--lh-lg); }
@@ -264,6 +274,18 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     background: var(--fill);
     color: var(--text-weak);
   }
+  /* A pull statement: one line set large so it reads at a glance. */
+  .prose :global(.pull) {
+    margin: var(--xl) 0;
+    font-size: var(--text-xl);
+    line-height: var(--lh-xl);
+    font-weight: 700;
+    text-wrap: pretty;
+  }
+  /* Two images side by side (one column on phones). */
+  .prose :global(figure.pair) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s); }
+  .prose :global(figure.pair figcaption) { grid-column: 1 / -1; margin-top: 0; }
+  @media (max-width: 559px) { .prose :global(figure.pair) { grid-template-columns: 1fr; } }
   .prose :global(.credit) { margin-top: var(--xxl); color: var(--text-weak); font-size: var(--text-sm); line-height: var(--lh-sm); }
 
   /* Split-flap metric boards */
@@ -272,6 +294,8 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--m);
   }
+  /* A metrics strip right under the cover: the business impact before anything else. */
+  .prose :global(.metrics.lead) { margin-top: 0; }
   @media (max-width: 559px) { .prose :global(.metrics) { grid-template-columns: 1fr; } }
   .prose :global(.metrics figcaption) { grid-column: 1 / -1; margin-top: 0; }
   .prose :global(.metric) {

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 import { nav, site } from '../site';
 
 interface Props {
@@ -59,6 +60,7 @@ const isCurrent = (href: string) =>
       <span>© {new Date().getFullYear()} {site.name}</span>
       <span>Designed and built by me with Claude Code. Astro, WebGPU, Web Audio, hosted on Vercel.</span>
     </footer>
+    <Analytics />
   </body>
 </html>
 
