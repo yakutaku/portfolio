@@ -21,14 +21,14 @@ tint: mint
     <p class="solari" data-solari>16%</p>
     <p class="metric-label">Free-to-paid conversion for people who finished onboarding, up from near zero</p>
   </div>
-  <figcaption>Launched March 2021. Okta acquired atSpoke later that year and called out the onboarding.</figcaption>
+  <figcaption>Launched March 2021.</figcaption>
 </figure>
 
 ## The problem
 
 ### White glove for some, empty rooms for everyone else
 
-<p class="pull">A blank screen is the least welcoming place on the internet, especially in a product this powerful.</p>
+<p class="lede">A blank screen is the least welcoming place on the internet, especially in a product this powerful.</p>
 
 Anyone who signed up for atSpoke on their own landed in empty states with zero guidance. 38% of self-serve customers gave us a low CSAT score, and many took over a month to file their first ticket.
 
@@ -73,6 +73,8 @@ My first version tried to teach everything. I assumed IT and HR managers wanted 
 
 Customer interviews showed the opposite. Users were too busy for a long tour and wanted to learn quickly, so I rebuilt it around the three aha moments.
 
+Another round of customer interviews showed that the “nice-to-have” steps like exploring team spaces felt unnecessary, so my final design focused on core actions with zero fluff.
+
 <figure>
   <img src="/work/atspoke/s6-iterations.webp" alt="Three versions of onboarding. Version 1, teach everything: 18 steps, failed because users were too busy for a long tour. Version 2, focus on aha moments: 7 steps tailored to each role, failed because people lost interest after about 2 minutes. Version 3, core actions with no fluff: 6 steps, onboarding time dropped by half." width="1920" height="1163" loading="lazy" decoding="async">
   <figcaption>Version 3 runs 4 to 7 steps depending on role, and 6 for team admins.</figcaption>
@@ -82,16 +84,12 @@ Customer interviews showed the opposite. Users were too busy for a long tour and
 
 ### Less tour, more doing
 
-**A role question up front:** The role quiz we included added friction at signup, but it meant every step after it was one that person could actually use.
+**A role question up front:** The role quiz I included added friction at signup, but it meant every step after it was one that person could actually use.
 
 <figure>
   <img src="/work/atspoke/s2-role-model.webp" alt="Diagram of how the role chosen at signup maps to onboarding steps." width="1920" height="1152" loading="lazy" decoding="async">
   <figcaption>The role question at signup decides which steps each person sees.</figcaption>
 </figure>
-
-**Practice, not a tour:** Instead of a feature tour, new users filed a practice ticket in their first minute, so they learned atSpoke by using it.
-
-**Every step earns its time:** Version 2 was still too long. In beta, people lost interest after about two minutes, so we cut anything a role didn't need, like exploring team spaces for people who mostly file tickets.
 
 ## Build
 
@@ -104,7 +102,7 @@ Pendo saved us weeks of engineering time, but our engineering manager still worr
   <figcaption>The in-product guidance spec, written so Pendo's guides matched our design system 1:1.</figcaption>
 </figure>
 
-Our designer owned the setup flows. I led research, strategy, flows, copy, and designed the in-product learning.
+Another designer on our team owned the setup flows. I led research, strategy, flows, copy, and designed the in-product experience.
 
 <figure>
   <img src="/work/atspoke/s4-voice.webp" alt="Example lines from the onboarding copy spec, each with its writing rule." width="1920" height="699" loading="lazy" decoding="async">
@@ -163,7 +161,7 @@ Each step, in the order a new user sees it.
 
 ### From near zero to a new channel
 
-We launched onboarding in March 2021. Of the customers who completed it, 16% upgraded to a paid plan (up from nearly zero). People who finish onboarding tend to be more motivated, so onboarding can't take credit for all of that lift. Average onboarding time also dropped by half. The bigger shift was that sales started treating self-serve as its own channel.
+We launched onboarding in March 2021. Of the customers who completed it, 16% upgraded to a paid plan (up from nearly zero). People who finish onboarding tend to be more motivated, so the new onboarding experience itself can't take credit for all of that lift. Average onboarding time also dropped by half, but the bigger shift was that sales started treating self-serve as its own channel.
 
 Okta acquired us in Q3 2021 for ~$79M, and their leadership called out our onboarding as especially strong compared to other SaaS products. Unfortunately, atSpoke was sunset a few months later.
 

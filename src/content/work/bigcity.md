@@ -25,7 +25,7 @@ demo: true
     <p class="solari" data-solari>&lt;1%</p>
     <p class="metric-label">CPU per instance</p>
   </div>
-  <figcaption>Launched October 2026. Used by Unknown Caller, Vaperror and other touring electronic artists.</figcaption>
+  <figcaption>Launched October 2026. Used by <a href="https://label.stereofox.com/artists/unknown-caller/">Unknown Caller</a>, <a href="https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha">Vaperror</a> and other touring electronic artists.</figcaption>
 </figure>
 
 ## The problem
@@ -41,7 +41,7 @@ If a track sounds dull and I want it to shine a bit more, it can take 3 – 4 pl
   <figcaption>Adding air today, and what BigCity replaces.</figcaption>
 </figure>
 
-> **Hypothesis:** Map a few parameters to one knob and make every position sound good, so producers get the sound without the rabbit hole.
+> **Hypothesis:** If one knob handles all three air moves and every position sounds good, producers will get a polished sound faster, without the rabbit hole.
 
 ## Discovery
 
@@ -176,7 +176,7 @@ Claude Code was great for v1.0 but it’s no substitute for judgment in a niche 
 
 BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on October 13, 2026, as pay-what-you-want, including $0. It's a small part of making a good song, so I wanted newer producers to be able to use it.
 
-City pop producer “Unknown Caller” said, “[BigCity] is quick and intuitive. I could see myself slapping this on vocals or master track to add polish and air.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha), another international touring electronic artist, called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
+City pop producer “[Unknown Caller](https://label.stereofox.com/artists/unknown-caller/)” said, “[BigCity] is quick and intuitive. I could see myself slapping this on vocals or master track to add polish and air.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha), another international touring electronic artist, called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
 
 It's too early to tell whether it keeps producers out of the rabbit hole, but being compared to a native Ableton plugin by an international touring artist definitely made me smile.
 
