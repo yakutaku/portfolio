@@ -34,7 +34,12 @@ demo: true
 
 Music production is complex at every layer: the idea, the sound design, the software itself. I've lost hours in submenus of submenus chasing a sound that plays for 1.5 seconds (and that most listeners will never notice).
 
-Plugins are supposed to help. Too many of them are expensive, use a lot of CPU, and come with a whole new UI to learn.
+If a track sounds dull and I want it to shine a bit more, it can take 3–4 plugins and 10+ knobs for one texture. The CPU adds up on older laptops, some of those plugins are $100–200, and by the time it sounds right the momentum I had is gone. Slate Digital's [Fresh Air](https://slatedigital.com/fresh-air/) gets closer, but it's still two knobs.
+
+<figure>
+  <img src="/work/bigcity/02b-workflow.webp" alt="Adding air to one track today takes four plugins in a chain, and each fix creates the next problem. An EQ high shelf at 10 to 12 kHz makes the S's harsh. A de-esser fixes that but makes it sound narrow. A width plugin fixes that but makes it louder. A gain match and A/B by ear checks whether it's better or just louder. Repeat on every track: 3 to 4 plugins, 10+ knobs, $100 to 200 per plugin, and CPU that adds up on older laptops. Root cause: air is three small moves, and today each one lives in a different plugin with its own UI. BigCity: one knob does all three (high shelf, micro-shift width and loudness match) with no harsh S's." width="1920" height="1040" loading="lazy" decoding="async">
+  <figcaption>Adding air today, and what BigCity replaces.</figcaption>
+</figure>
 
 <figure>
   <img src="/work/bigcity/02-early-sketch.webp" alt="An early BigCity concept: a light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1516" height="796" loading="lazy" decoding="async">
@@ -66,13 +71,17 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number:** In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. The result has the same loudness and more character.
+**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds: it bends the knob so 50 sounds like the old 70. After launch, testers still found it too subtle on some tracks, even at 100, so 1.1 doubles the range: the new 50 is 1.0's 100.
+
+<!-- Tune-by-ear chart (pre-beta, 1.0, 1.1) goes here once voicing-curves.csv arrives. Add the line on why curves B and C lost above. -->
 
 **Nothing else on the panel:** No presets (one knob doesn’t need a preset browser) and no extra controls (every extra knob is a submenu waiting to happen).
 
 ## The experience
 
 ### From first pass to final
+
+My first Figma pass didn't feel great to look at and lacked the visual texture I was aiming for, so I scrapped it and rebuilt from the ground up.
 
 <figure>
   <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
@@ -131,7 +140,7 @@ Nothing shipped without passing:
 - A CPU benchmark on every change (final: ~0.9% per instance on an M4 Max)
 - Apple code signing and notarization, so it installs without Gatekeeper warnings
 
-**Measure, don't guess:** With the window open, the water shimmer looked like it added 220 MB of memory. I decided if the memory stuck around after closing the window, the shimmer was out. Memory dropped from 282 MB to 67 MB the moment the window closed (the real cost came from JUCE’s macOS renderer) so the shimmer stayed.
+**Measure before you cut:** With the window open, the water shimmer looked like it added 220 MB of memory. I decided if the memory stuck around after closing the window, the shimmer was out. Memory dropped from 282 MB to 67 MB the moment the window closed (the real cost came from JUCE’s macOS renderer) so the shimmer stayed. A pretty detail is fine as long as it doesn't slow producers down.
 
 <figure>
   <img src="/work/bigcity/10-memory.webp" alt="Chart of plugin memory use with the window open versus closed." width="1920" height="896" loading="lazy" decoding="async">
@@ -142,7 +151,9 @@ Nothing shipped without passing:
 
 I wrote the spec, designed BigCity in Figma, and chose the architecture. Claude Code explained JUCE and wrote first-draft code, which I reviewed and tested in real-time.
 
-But AI also can't listen like humans. Parameters jumped in steps instead of gliding, so sweeping the knob caused zipper noise: that stepped, robotic sound. I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so each one glides between values.
+<p class="pull">But AI can't listen like humans.</p>
+
+Claude Code's first draft let the knob jump between values, so sweeping it caused zipper noise: that stepped, robotic sound. I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so each parameter glides between values.
 
 Claude Code was great for v1.0 but it’s no substitute for judgment in a niche this specific.
 
@@ -154,12 +165,7 @@ BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on O
 
 Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.”
 
-Back to the hypothesis: one knob, and every position sounds good. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
-
-## What I learned
-
-- **Tune by ear, not by number:** The default looked right on paper, but you don't know what sounds good until you test it on multiple systems.
-- **Measure before you cut:** The shimmer looked like it cost 220 MB of memory, but the real cost came from JUCE's macOS renderer, so the shimmer stayed. A pretty detail is fine as long as it doesn't slow producers down.
+Back to the hypothesis: one knob, and every position sounds good. One knob held up; the strength took two rounds to get right. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
 
 ## What's next
 
