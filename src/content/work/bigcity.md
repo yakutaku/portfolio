@@ -37,7 +37,7 @@ Music production is complex at every layer: the idea, the sound design, the soft
 If a track sounds dull and I want it to shine a bit more, it can take 3–4 plugins and 10+ knobs for one texture. The CPU adds up on older laptops, some of those plugins are $100–200, and by the time it sounds right the momentum I had is gone. Slate Digital's [Fresh Air](https://slatedigital.com/fresh-air/) gets closer, but it's still two knobs.
 
 <figure>
-  <img src="/work/bigcity/02b-workflow.webp" alt="Adding air to one track today takes four plugins in a chain, and each fix creates the next problem. An EQ high shelf at 10 to 12 kHz makes the S's harsh. A de-esser fixes that but makes it sound narrow. A width plugin fixes that but makes it louder. A gain match and A/B by ear checks whether it's better or just louder. Repeat on every track: 3 to 4 plugins, 10+ knobs, $100 to 200 per plugin, and CPU that adds up on older laptops. Root cause: air is three small moves, and today each one lives in a different plugin with its own UI. BigCity: one knob does all three (high shelf, micro-shift width and loudness match) with no harsh S's." width="1920" height="1040" loading="lazy" decoding="async">
+  <img src="/work/bigcity/02b-workflow.webp" alt="Adding air to one track today takes four plugins in a chain, and each fix creates the next problem. An EQ high shelf at 10 to 12 kHz makes the S's harsh. A de-esser fixes that but makes it sound narrow. A width plugin fixes that but makes it louder. A gain match and A/B by ear checks whether it's better or just louder. Repeat on every track: 3 to 4 plugins, 10+ knobs, $100 to 200 per plugin, and CPU that adds up on older laptops. Root cause: air is three small moves, and today each one lives in a different plugin with its own UI. BigCity: one knob does all three (high shelf, micro-shift width and loudness match)." width="1920" height="1040" loading="lazy" decoding="async">
   <figcaption>Adding air today, and what BigCity replaces.</figcaption>
 </figure>
 
@@ -71,9 +71,14 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds: it bends the knob so 50 sounds like the old 70. After launch, testers still found it too subtle on some tracks, even at 100, so 1.1 doubles the range: the new 50 is 1.0's 100.
+**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds: it bends the knob so 50 sounds like the old 70. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
 
-<!-- Tune-by-ear chart (pre-beta, 1.0, 1.1) goes here once voicing-curves.csv arrives. Add the line on why curves B and C lost above. -->
+After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), and Medium won because it goes further at the top without warble or harshness.
+
+<figure>
+  <img src="/work/bigcity/04-knob-response.webp" alt="Line chart of air at 10 kHz by City size. Pre-beta is a straight line to +7.8 dB at 100, with +3.9 dB at 50. 1.0 bends upward to +5.5 dB at 50 and the same +7.8 dB at 100. 1.1 reaches +7.8 dB at 50 and +10.0 dB at 100." width="1920" height="960" loading="lazy" decoding="async">
+  <figcaption>Two rounds of tuning by ear: 1.0 bent the knob, and 1.1 doubled its range.</figcaption>
+</figure>
 
 **Nothing else on the panel:** No presets (one knob doesn’t need a preset browser) and no extra controls (every extra knob is a submenu waiting to happen).
 
@@ -89,8 +94,8 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
 </figure>
 
 <figure>
-  <img src="/work/bigcity/06-final-plugin.webp" alt="The BigCity 1.0 plugin: a City size knob, a pixel skyline display and an FX on/bypass switch." width="1536" height="831" loading="lazy" decoding="async">
-  <figcaption>BigCity 1.0.</figcaption>
+  <img src="/work/bigcity/06-final-plugin.webp" alt="The BigCity 1.1 plugin at City size 100: the knob turned all the way up, a dusk skyline with lit windows, and the FX on/bypass switch." width="1536" height="831" loading="lazy" decoding="async">
+  <figcaption>BigCity 1.1.</figcaption>
 </figure>
 
 <figure>
@@ -136,7 +141,7 @@ I built BigCity as a VST3 so it could work beyond Ableton. Since that cost extra
 Nothing shipped without passing:
 
 - pluginval, the industry-standard plugin validator, at its strictest level
-- 124 automated tests, including proof that City size 0 leaves audio untouched at every sample rate from 44.1 to 192 kHz
+- 135 automated tests, including proof that City size 0 leaves audio untouched at every sample rate from 44.1 to 192 kHz
 - A CPU benchmark on every change (final: ~0.9% per instance on an M4 Max)
 - Apple code signing and notarization, so it installs without Gatekeeper warnings
 
@@ -163,7 +168,7 @@ Claude Code was great for v1.0 but it’s no substitute for judgment in a niche 
 
 BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on October 13, 2026, as pay-what-you-want, including $0. It's a small part of making a good song, so I wanted newer producers to be able to use it.
 
-Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.”
+Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha) called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
 
 Back to the hypothesis: one knob, and every position sounds good. One knob held up; the strength took two rounds to get right. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
 
