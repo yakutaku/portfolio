@@ -94,6 +94,21 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
 </figure>
 
 <figure>
+  <img src="/work/bigcity/05a-v2.webp" alt="Version 2 of the BigCity interface: the first full layout, with screws, pastel stripes, a pixel skyline, a City size knob at 50 and an FX on/bypass switch." width="1536" height="832" loading="lazy" decoding="async">
+  <figcaption>v2: the first full layout, with screws, stripes, skyline, knob and switch.</figcaption>
+</figure>
+
+<figure>
+  <img src="/work/bigcity/05b-v4.webp" alt="Version 4 of the BigCity interface: aged paper texture with scuffs, a sunset skyline, a redesigned knob and an LCD readout showing 50.0." width="1536" height="832" loading="lazy" decoding="async">
+  <figcaption>v4: paper texture, scuffs, aging, screwdriver slips, and an LCD readout with burned-in segments.</figcaption>
+</figure>
+
+<figure>
+  <img src="/work/bigcity/06b-sunset-options.webp" alt="Three sunset options for the skyline. A, golden hour: warm gold sun and a peach-to-lavender sky. B, city pop dusk, marked picked: an indigo sky into coral with a striped retro sun. C, pink hour: pastel pink and apricot." width="1920" height="747" loading="lazy" decoding="async">
+  <figcaption>Day 8 sunset options. B, city pop dusk, made the cut.</figcaption>
+</figure>
+
+<figure>
   <img src="/work/bigcity/06-final-plugin.webp" alt="The BigCity 1.1 plugin at City size 100: the knob turned all the way up, a dusk skyline with lit windows, and the FX on/bypass switch." width="1536" height="831" loading="lazy" decoding="async">
   <figcaption>BigCity 1.1.</figcaption>
 </figure>
