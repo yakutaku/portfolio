@@ -71,7 +71,7 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. It bends the knob so 50 sounds like the old 70. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
+**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
 
 After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), with Medium winning because it goes further at the top without warble or harshness.
 
@@ -105,7 +105,7 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
 
 <figure>
   <img src="/work/bigcity/06b-sunset-options.webp" alt="Three sunset options for the skyline. A, golden hour: warm gold sun and a peach-to-lavender sky. B, city pop dusk, marked picked: an indigo sky into coral with a striped retro sun. C, pink hour: pastel pink and apricot." width="1920" height="747" loading="lazy" decoding="async">
-  <figcaption>Day 8 sunset options. B, city pop dusk, made the cut.</figcaption>
+  <figcaption>Sunset options. B, city pop dusk, made the cut.</figcaption>
 </figure>
 
 <figure>
@@ -171,9 +171,9 @@ Nothing shipped without passing:
 
 I wrote the spec, designed BigCity in Figma, and chose the architecture. Claude Code explained JUCE and wrote first-draft code, which I reviewed and tested in real-time.
 
-<p class="pull">But AI can't listen like humans.</p>
+<p class="pull">But AI is genuinely terrible at critical listening.</p>
 
-Claude Code's first draft let the knob jump between values, so sweeping it caused zipper noise: that stepped, robotic sound. I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so each parameter glides between values.
+Claude Code’s first draft led to jumps between values, so sweeping the knob caused zipper noise (that harsh, robotic sound nobody likes). I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so the sound glides between values.
 
 Claude Code was great for v1.0 but it’s no substitute for judgment in a niche this specific.
 
