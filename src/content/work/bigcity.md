@@ -73,7 +73,7 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
 
 **Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds: it bends the knob so 50 sounds like the old 70. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
 
-After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), and Medium won because it goes further at the top without warble or harshness.
+After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), with Medium winning because it goes further at the top without warble or harshness.
 
 <figure>
   <img src="/work/bigcity/04-knob-response.webp" alt="Line chart of air at 10 kHz by City size. Pre-beta is a straight line to +7.8 dB at 100, with +3.9 dB at 50. 1.0 bends upward to +5.5 dB at 50 and the same +7.8 dB at 100. 1.1 reaches +7.8 dB at 50 and +10.0 dB at 100." width="1920" height="960" loading="lazy" decoding="async">
@@ -168,7 +168,7 @@ Claude Code was great for v1.0 but it’s no substitute for judgment in a niche 
 
 BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on October 13, 2026, as pay-what-you-want, including $0. It's a small part of making a good song, so I wanted newer producers to be able to use it.
 
-Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha) called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
+Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha), an international touring electronic artist, called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
 
 Back to the hypothesis: one knob, and every position sounds good. One knob held up; the strength took two rounds to get right. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
 
