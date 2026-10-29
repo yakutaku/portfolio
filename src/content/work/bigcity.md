@@ -71,7 +71,7 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
   <figcaption>One knob, three parameters.</figcaption>
 </figure>
 
-**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds: it bends the knob so 50 sounds like the old 70. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
+**Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. It bends the knob so 50 sounds like the old 70. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
 
 After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), with Medium winning because it goes further at the top without warble or harshness.
 
