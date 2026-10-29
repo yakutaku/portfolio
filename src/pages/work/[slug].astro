@@ -282,6 +282,8 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     font-weight: 700;
     text-wrap: pretty;
   }
+  /* A lead paragraph: a touch larger than body text, same weight, so it reads as the section's headline thought. */
+  .prose :global(.lede) { font-size: var(--text-lg); line-height: var(--lh-lg); }
   /* Two images side by side (one column on phones). */
   .prose :global(figure.pair) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s); }
   .prose :global(figure.pair figcaption) { grid-column: 1 / -1; margin-top: 0; }

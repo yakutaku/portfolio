@@ -25,25 +25,20 @@ demo: true
     <p class="solari" data-solari>&lt;1%</p>
     <p class="metric-label">CPU per instance</p>
   </div>
-  <figcaption>Launched October 2026. Used by Unknown Caller and other touring electronic artists.</figcaption>
+  <figcaption>Launched October 2026. Used by Unknown Caller, Vaperror and other touring electronic artists.</figcaption>
 </figure>
 
 ## The problem
 
 ### Lost in the menus
 
-Music production is complex at every layer: the idea, the sound design, the software itself. I've lost hours in submenus of submenus chasing a sound that plays for 1.5 seconds (and that most listeners will never notice).
+Music production is complex at every layer: the idea, the sound design, and the software itself. I've lost hours in submenus of submenus chasing a sound that plays for 1.5 seconds (and that most listeners will never notice).
 
-If a track sounds dull and I want it to shine a bit more, it can take 3–4 plugins and 10+ knobs for one texture. The CPU adds up on older laptops, some of those plugins are $100–200, and by the time it sounds right the momentum I had is gone. Slate Digital's [Fresh Air](https://slatedigital.com/fresh-air/) gets closer, but it's still two knobs.
+If a track sounds dull and I want it to shine a bit more, it can take 3 – 4 plugins and 10+ knobs for one texture. The CPU adds up on older laptops, some of those plugins are $100 – 200, and by the time it sounds right the momentum I had is gone. Slate Digital's [Fresh Air](https://slatedigital.com/fresh-air/) gets closer, but it's still two knobs.
 
 <figure>
   <img src="/work/bigcity/02b-workflow.webp" alt="Adding air to one track today takes four plugins in a chain, and each fix creates the next problem. An EQ high shelf at 10 to 12 kHz makes the S's harsh. A de-esser fixes that but makes it sound narrow. A width plugin fixes that but makes it louder. A gain match and A/B by ear checks whether it's better or just louder. Repeat on every track: 3 to 4 plugins, 10+ knobs, $100 to 200 per plugin, and CPU that adds up on older laptops. Root cause: air is three small moves, and today each one lives in a different plugin with its own UI. BigCity: one knob does all three (high shelf, micro-shift width and loudness match)." width="1920" height="1040" loading="lazy" decoding="async">
   <figcaption>Adding air today, and what BigCity replaces.</figcaption>
-</figure>
-
-<figure>
-  <img src="/work/bigcity/02-early-sketch.webp" alt="An early BigCity concept: a light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1516" height="796" loading="lazy" decoding="async">
-  <figcaption>Where BigCity started.</figcaption>
 </figure>
 
 > **Hypothesis:** Map a few parameters to one knob and make every position sound good, so producers get the sound without the rabbit hole.
@@ -54,7 +49,7 @@ If a track sounds dull and I want it to shine a bit more, it can take 3–4 plug
 
 I talked to 10+ producers across backgrounds and skill levels. Nobody asked for more features. They asked for less:
 
-- **Too expensive:** $100–200 for one texture stings after spending $400+ on a DAW.
+- **Too expensive:** $100 – 200 for one texture stings after spending $400+ on a DAW.
 - **Too heavy:** Bedroom producers often run older MacBooks that choke on long plugin chains.
 - **Too deep:** The joy of a new sound dies somewhere in a submenu of a submenu.
 
@@ -62,7 +57,7 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
 
 ### One knob, one job
 
-**Define the sound first:** City pop is a niche Japanese genre from the '70s and '80s, and its sheen is hard to fake. I defined “sparkle” as a high-shelf boost around 10–12 kHz (the “air” band where mixes get their shine) plus a subtle micro pitch shift. Then I mapped everything to one knob.
+**Define the sound first:** City pop is a niche Japanese genre from the '70s and '80s, and its sheen is hard to fake. I defined “sparkle” as a high-shelf boost around 10 – 12 kHz (the “air” band where mixes get their shine) plus a subtle micro pitch shift. Then I mapped everything to one knob.
 
 **Every position sounds good:** City size runs from 0 (LittleCity) to 100 (BigCity). At 0, your audio passes through untouched. Each knob position has a precomputed gain offset for loudness compensation, so you hear sparkle, not just a volume bump.
 
@@ -73,7 +68,7 @@ I talked to 10+ producers across backgrounds and skill levels. Nobody asked for 
 
 **Tune by ear, not by number:** The one-knob part of my hypothesis held up. What I got wrong was how strong it should be. In beta testing, 50 (the default) sounded too subtle. Instead of just turning the number up, I rendered one of my own tracks through three stronger curves and kept the one that held up on studio monitors, laptop speakers, and earbuds. All three were rendered on the beta loop and compared by ear; A sounded best, and it was the only one that fixed the default without changing the top.
 
-After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings (Gentle, Medium and Literal double), with Medium winning because it goes further at the top without warble or harshness.
+After launch, testers still found it too subtle on some tracks, even at 100. So 1.1 doubles the range: the new 50 is 1.0's 100. I tested three more voicings at 100: Gentle (+9 dB of air), Medium (+10 dB) and Literal double (+15.6 dB, a reference for where the sound breaks), with Medium winning because it goes further at the top without warble or harshness.
 
 <figure>
   <img src="/work/bigcity/04-knob-response.webp" alt="Line chart of air at 10 kHz by City size. Pre-beta is a straight line to +7.8 dB at 100, with +3.9 dB at 50. 1.0 bends upward to +5.5 dB at 50 and the same +7.8 dB at 100. 1.1 reaches +7.8 dB at 50 and +10.0 dB at 100." width="1920" height="960" loading="lazy" decoding="async">
@@ -94,13 +89,13 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
 </figure>
 
 <figure>
-  <img src="/work/bigcity/05a-v2.webp" alt="Version 2 of the BigCity interface: the first full layout, with screws, pastel stripes, a pixel skyline, a City size knob at 50 and an FX on/bypass switch." width="1536" height="832" loading="lazy" decoding="async">
-  <figcaption>v2: the first full layout, with screws, stripes, skyline, knob and switch.</figcaption>
+  <img src="/work/bigcity/02-early-sketch.webp" alt="Version 2 of the BigCity interface: a clean light cream panel with the BigCity wordmark, a City size knob at 68.8, a pastel pixel skyline and an FX on/bypass switch." width="1516" height="796" loading="lazy" decoding="async">
+  <figcaption>v2: easier on the eyes but lacking visual texture.</figcaption>
 </figure>
 
 <figure>
-  <img src="/work/bigcity/05b-v4.webp" alt="Version 4 of the BigCity interface: aged paper texture with scuffs, a sunset skyline, a redesigned knob and an LCD readout showing 50.0." width="1536" height="832" loading="lazy" decoding="async">
-  <figcaption>v4: paper texture, scuffs, aging, screwdriver slips, and an LCD readout with burned-in segments.</figcaption>
+  <img src="/work/bigcity/05b-v4.webp" alt="Version 3 of the BigCity interface: aged paper texture with scuffs, a sunset skyline, a redesigned knob and an LCD readout showing 50.0." width="1536" height="832" loading="lazy" decoding="async">
+  <figcaption>v3: paper texture, scuffs, aging, screwdriver slips, and an LCD readout with burned-in segments.</figcaption>
 </figure>
 
 <figure>
@@ -118,7 +113,7 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
   <figcaption>City size from 0 to 100, then bypass on and off. Sound on.</figcaption>
 </figure>
 
-**A skyline that shows what you hear:** A beta tester asked, “What if the dial controlled time of day too?” I changed the design so the sun sets from midday to dusk as the city grows and the knob moves from 0 to 100. The water shimmers too (a small nod to how giddy I felt seeing that effect in Pokémon Silver on my old Game Boy).
+**A skyline that shows what you hear:** A beta tester asked, “What if the dial controlled time of day too?” I changed the design so the sun sets from midday to dusk as the city size grows and the knob moves from 0 to 100. The water shimmers too (a small nod to how giddy I felt seeing that effect in Pokémon Silver on my old Game Boy).
 
 <figure>
   <img src="/work/bigcity/07-time-of-day.webp" alt="The skyline at City size 0 (midday), 25 (afternoon), 50 (golden hour), 75 (sunset) and 100 (dusk), with more windows lit as the city grows." width="1920" height="436" loading="lazy" decoding="async">
@@ -142,7 +137,7 @@ My first Figma pass didn't feel great to look at and lacked the visual texture I
 
 ### One click and you're deleted
 
-<p class="pull">Modern plugins are CPU-hungry, and on older machines that means clicks, pops, and dropouts mid-session, forcing producers to freeze and flatten tracks just to keep working. Every extra step pulls them out of creative flow.</p>
+<p class="lede">Modern plugins are CPU-hungry, and on older machines that means clicks, pops, and dropouts mid-session, forcing producers to freeze and flatten tracks just to keep working. Every extra step pulls them out of creative flow.</p>
 
 Real-time audio is unforgiving. One click, pop, or crash and a producer decides your plugin isn't worth it.
 
@@ -171,9 +166,7 @@ Nothing shipped without passing:
 
 I wrote the spec, designed BigCity in Figma, and chose the architecture. Claude Code explained JUCE and wrote first-draft code, which I reviewed and tested in real-time.
 
-<p class="pull">But AI is genuinely terrible at critical listening.</p>
-
-Claude Code’s first draft led to jumps between values, so sweeping the knob caused zipper noise (that harsh, robotic sound nobody likes). I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so the sound glides between values.
+But AI is genuinely terrible at critical listening. Claude Code’s first draft led to jumps between values, so sweeping the knob caused zipper noise (that harsh, robotic sound that nobody likes). I caught it through ear testing on multiple speakers and headphones and added parameter smoothing so the sound glides between values.
 
 Claude Code was great for v1.0 but it’s no substitute for judgment in a niche this specific.
 
@@ -183,9 +176,9 @@ Claude Code was great for v1.0 but it’s no substitute for judgment in a niche 
 
 BigCity launched on [Gumroad](https://sunshoweraudio.gumroad.com/l/bigcity) on October 13, 2026, as pay-what-you-want, including $0. It's a small part of making a good song, so I wanted newer producers to be able to use it.
 
-Early signal is good. City pop producer “Unknown Caller” tried it on multiple tracks with no CPU hit and said, “All my homies hate two knobs.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha), an international touring electronic artist, called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
+City pop producer “Unknown Caller” said, “[BigCity] is quick and intuitive. I could see myself slapping this on vocals or master track to add polish and air.” [Vaperror](https://open.spotify.com/artist/0AEVuiJFczDd4dkmZh2Kha), another international touring electronic artist, called it “a stereoizer with a ‘smoother’ feel than Ableton Utility.”
 
-Back to the hypothesis: one knob, and every position sounds good. One knob held up; the strength took two rounds to get right. The engineering side holds up. Audio is untouched at 0, loudness stays close to matched across the dial, and the plugin is light enough to forget. Whether it keeps producers out of the rabbit hole is too early to call. The signal I care about most: producers sending me tracks that use it.
+It's too early to tell whether it keeps producers out of the rabbit hole, but being compared to a native Ableton plugin by an international touring artist definitely made me smile.
 
 ## What's next
 
