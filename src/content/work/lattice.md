@@ -76,7 +76,7 @@ Our designer owned the visual navigation updates. I owned research, wireframing,
 
 <figure>
   <img src="/work/lattice/07-after-admin-nav-annotated.webp" alt="Redesigned admin side nav with four callouts: selected state uses a fill, a bar and bold text, not color alone; daily workflows grouped together; admin-only tools under one Admin label; 48px rows." width="1440" height="960" loading="lazy" decoding="async">
-  <figcaption>The shipped admin nav structure, rebuilt in 2026.</figcaption>
+  <figcaption>The shipped admin nav structure.</figcaption>
 </figure>
 
 The selected state mattered more than it looked. In the 2022 nav, it was a slightly lighter gray, and color-only cues disappear for colorblind users and on low-quality monitors. A bolder color would have competed with the blue reserved for clickable elements. So in my rebuild, the selected row gets three cues: a fill, a 3px bar, and semibold text. Every label on the dark rail clears WCAG AA, and you can still tell where you are in grayscale.
