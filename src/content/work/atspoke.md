@@ -68,7 +68,7 @@ My first version tried to teach everything. I assumed IT and HR managers wanted 
 <figure class="pair">
   <img src="/work/atspoke/v1-tour-step-2.webp" alt="Version 1 of the tour, step 2 of 18: a tooltip over an empty inbox introducing team spaces." width="1920" height="1200" loading="lazy" decoding="async">
   <img src="/work/atspoke/v1-tour-step-5.webp" alt="Version 1 of the tour, step 5 of 18: a tooltip introducing the analytics dashboard." width="1920" height="1200" loading="lazy" decoding="async">
-  <figcaption>Version 1, reconstructed: steps 2 and 5 of 18.</figcaption>
+  <figcaption>Version 1: steps 2 and 5 of 18.</figcaption>
 </figure>
 
 Customer interviews showed the opposite. Users were too busy for a long tour and wanted to learn quickly, so I rebuilt it around the three aha moments.

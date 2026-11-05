@@ -31,7 +31,7 @@ tint: lilac
 Lattice doubled revenue in 2021 and grew past performance management and engagement into an all-in-one HR platform: goals, career development, compensation analytics, and more. Every new product got its own sidebar item. By 2022, leadership flagged navigation as a top customer complaint, and sales said the clutter was confusing prospects in EMEA, a market we were pushing into that year.
 
 <figure>
-  <img src="/work/lattice/02-before-2022-admin-nav.webp" alt="Reconstruction of Lattice&#x27;s 2022 admin home. The dark side nav lists 13 items in one long list, with Grow sitting next to Analytics. Page content is faded to focus on the nav." width="1440" height="960" loading="lazy" decoding="async">
+  <img src="/work/lattice/02-before-2022-admin-nav.webp" alt="Lattice&#x27;s 2022 admin home. The dark side nav lists 13 items in one long list, with Grow sitting next to Analytics. Page content is faded to focus on the nav." width="1440" height="960" loading="lazy" decoding="async">
   <figcaption>The 2022 admin sidebar.</figcaption>
 </figure>
 
@@ -122,4 +122,3 @@ My role was eliminated in a reorg two weeks before launch. My pod later shared t
 
 I’d push role-based navigation further, personalizing what’s surfaced by company size and real usage, so a complex product feels simple no matter how SaaS-fluent you are.
 
-<p class="credit">Rebuilt from memory and references in Figma and Claude Code. Visuals refreshed in 2026.</p>
