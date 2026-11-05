@@ -121,6 +121,7 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
       cell.setAttribute('aria-hidden', 'true');
       cell.dataset.target = char;
       cell.textContent = reduceMotion ? char : ' ';
+      cell.classList.toggle('is-symbol', reduceMotion && !/\d/.test(char));
       board.append(cell);
       return cell;
     });
@@ -134,6 +135,7 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
       let i = (end - 6 - Math.floor(Math.random() * 4) + DECK.length) % DECK.length;
       setTimeout(function step() {
         cell.textContent = DECK[i];
+        cell.classList.toggle('is-symbol', !/\d/.test(DECK[i]));
         cell.classList.remove('flapping');
         void cell.offsetWidth; // restart the flap animation
         cell.classList.add('flapping');
@@ -304,16 +306,18 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     display: flex;
     gap: 6px;
     margin: 0;
-    font: 700 clamp(44px, 6vw, 64px) / 1 var(--font);
+    --fs: clamp(44px, 6vw, 64px);
+    font: 700 var(--fs) / 1 var(--font);
     font-variant-numeric: tabular-nums;
   }
   .prose :global(.flap) {
     position: relative;
     display: grid;
     place-items: center;
-    width: 0.92em;
-    height: 1.25em;
-    font-size: 0.9em;
+    /* Sized from the board, not the glyph, so smaller symbols keep the same card. */
+    width: calc(var(--fs) * 0.828);
+    height: calc(var(--fs) * 1.125);
+    font-size: calc(var(--fs) * 0.9);
     border-radius: 6px;
     background: var(--grey-950);
     color: var(--cream-50);
@@ -329,6 +333,8 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     margin-top: -1px;
     background: rgb(251 250 247 / 0.18);
   }
+  /* +, -, <, % and . are wider or sit lower than digits: set them smaller and nudge them up to the optical centre. */
+  .prose :global(.flap.is-symbol) { font-size: calc(var(--fs) * 0.62); padding-bottom: calc(var(--fs) * 0.04); }
   .prose :global(.flap.flapping) { animation: flap 70ms ease-in-out; }
   @keyframes flap {
     50% { transform: scaleY(0.15); filter: brightness(0.6); }

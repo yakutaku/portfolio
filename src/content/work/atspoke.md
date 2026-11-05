@@ -171,4 +171,3 @@ Okta acquired us in Q3 2021 for ~$79M, and their leadership called out our onboa
 
 **Get to customers sooner:** I'd put prototypes in front of customers sooner and run a lighter process. Direct customer feedback is worth more than the perfect spec.
 
-<p class="credit">Visuals reconstructed from the original design spec.</p>
