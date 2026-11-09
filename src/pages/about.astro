@@ -9,7 +9,7 @@ import { site } from '../site';
     <section class="about split" aria-labelledby="about-heading">
       <h1 id="about-heading" class="page-title">About</h1>
       <div class="split-body">
-        {site.about.paragraphs.map((text, i) => <p class={i === 0 ? 'large' : 'large weak'}>{text}</p>)}
+        {site.about.paragraphs.map((text, i) => <p class="large">{text}</p>)}
         <a class="resume-link" href="/resume">Resume</a>
       </div>
     </section>

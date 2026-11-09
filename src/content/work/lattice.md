@@ -15,7 +15,7 @@ tint: lilac
 <figure class="metrics lead">
   <div class="metric">
     <p class="solari" data-solari>+15%</p>
-    <p class="metric-label">Navigation CSAT after launch</p>
+    <p class="metric-label">User satisfaction when navigating (Navigation CSAT)</p>
   </div>
   <div class="metric">
     <p class="solari" data-solari>20%</p>
@@ -46,6 +46,11 @@ With our tech lead and another designer, I audited the platform to find out why 
 - **Back didn’t mean back:** The browser back button often dumped users on the homepage, mid-workflow.
 - **Bookmarks were the real nav:** Getting anywhere took so many clicks that admins just bookmarked everything.
 - **The sidebar kept sprawling:** The SaaS equivalent of the 405 in LA: one more lane will fix it, promise.
+
+<figure>
+  <img src="/work/lattice/04-how-we-got-to-workflows.webp" alt="An open card sort with HR admins and employees showed people group by task. Four nav structures compared: product suites, collapsible sections and pinned favorites were dropped; workflow groups shipped." width="1440" height="1006" loading="lazy" decoding="async">
+  <figcaption>How card sorting pointed us toward workflows over product buckets.</figcaption>
+</figure>
 
 ## Constraints
 
@@ -87,7 +92,7 @@ The selected state mattered more than it looked. In the 2022 nav, it was a sligh
 </figure>
 
 <figure>
-  <img src="/work/lattice/08-browser-back-fix.webp" alt="Two flows. Before: from the reviews list, open a review, press the browser&#x27;s back button, land on Home. After: the same steps return you to the reviews list." width="1440" height="1064" loading="lazy" decoding="async">
+  <img src="/work/lattice/08-browser-back-fix.webp" alt="Step 1: open a review from the Q3 2022 reviews list. Step 2: press the browser&#x27;s back button. Before the fix, back sent you to Home, mid-workflow. After the fix, back returns you to the reviews list where you left off." width="1920" height="1730" loading="lazy" decoding="async">
   <figcaption>Back now returns people to where they were, with every existing URL intact.</figcaption>
 </figure>
 
@@ -97,16 +102,11 @@ The selected state mattered more than it looked. In the 2022 nav, it was a sligh
 - **Collapsible sections:** An extra click for power users on every visit, and not cheap to build.
 - **Pinned favorites:** Expensive (and bookmarks already did the job).
 
-<figure>
-  <img src="/work/lattice/04-how-we-got-to-workflows.webp" alt="An open card sort with HR admins and employees showed people group by task. Four nav structures compared: product suites, collapsible sections and pinned favorites were dropped; workflow groups shipped." width="1440" height="1006" loading="lazy" decoding="async">
-  <figcaption>How card sorting pointed us toward workflows over product buckets.</figcaption>
-</figure>
-
 ## Impact
 
-### Smoother navigation, faster reviews
+### Navigation CSAT up 15%, reviews 20% faster
 
-My role was eliminated in a reorg two weeks before launch. My pod later shared the results from the first quarter after launch. Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
+In the first quarter after launch, Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
 
 ## Reflection
 

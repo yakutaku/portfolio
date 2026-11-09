@@ -13,6 +13,7 @@ export const site = {
     /** Add your artist URL to show the Spotify link. */
     spotify: '',
     gumroad: 'https://sunshoweraudio.gumroad.com/l/bigcity',
+    github: 'https://github.com/yakutaku',
   },
   home: {
     headline: 'I design and build software that feels like an instrument',
