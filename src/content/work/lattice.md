@@ -8,7 +8,7 @@ timeline: "3 months (Jun – Aug 2022)"
 tldr: "I led research and IA for Lattice’s navigation overhaul as it grew from a few disparate products into an all-in-one HR platform. Navigation CSAT increased by 15% and time to open a review (a core action) decreased by 20%."
 order: 2
 cover: "/work/lattice/01-cover.webp"
-coverAlt: "Lattice's 2022 side navigation, a long list of 13 tools, fading behind the redesigned navigation grouped into everyday workflows and an admin section."
+coverAlt: "The redesigned Lattice admin home. The sidebar groups tools under Everyone, Workflows and Admin, with Home selected, next to a task list and review and engagement progress cards."
 tint: lilac
 ---
 
@@ -26,9 +26,9 @@ tint: lilac
 
 ## Overview
 
-### The platform pod
+### Platforms: the kitchen sink of all companies
 
-Our pod owned the foundation every Lattice product sat on: navigation, site-wide IA, permissions, accessibility, internationalization, the mobile app, integrations, notifications, settings and admin, and Company Pages. Lattice had just grown from a few products into an all-in-one HR platform, so every change we made touched every product team.
+Our pod (platform) owned the foundation every Lattice product sat on: navigation, site-wide IA, permissions, accessibility, internationalization, the mobile app, integrations, notifications, settings and admin, and Company Pages. Lattice had grown from a few products into an all-in-one HR platform, so every change we made touched nearly every product team.
 
 - **Navigation and site-wide IA:** this case study.
 - **Company Pages:** I redesigned it around celebrations, feedback and key links, and DAU/MAU grew 25%.
@@ -64,7 +64,6 @@ With our tech lead and another designer, I audited the platform to find out why 
     <tr><th scope="row">Sales calls (Gong)</th><td>~10</td><td>The clutter confused prospects, especially in EMEA</td></tr>
     <tr><th scope="row">Hotjar and site maps</th><td>Drop-off data</td><td>Where people abandoned what they came to do</td></tr>
     <tr><th scope="row">Open card sort</th><td>HR admins and employees</td><td>People group by task, not by product name</td></tr>
-    <tr><th scope="row">Our staff engineer</th><td>Several conversations</td><td>Back behavior was a long-known problem</td></tr>
   </tbody>
 </table>
 </div>
@@ -84,7 +83,7 @@ Every source kept surfacing the same three problems:
 
 ### A bigger redesign vs. what we could ship
 
-Our team wanted a bigger redesign. Other product teams pushed back hard, because moving their products in the nav could hurt their own metrics. Leadership gave us three months and no extra people, and tech debt ruled out a full rebuild.
+Our team wanted a bigger redesign. Other product teams pushed back hard, because moving their products in the nav could hurt their own goals. Leadership pressure, limited resources, and tech debt ruled out a full rebuild.
 
 We also couldn’t change URLs. Admins linked Lattice pages in emails, Notion, Google Docs, Slack and Teams, and for most of them bookmarks were the navigation. New URLs would have broken all of those links and added complaints about something people already hated.
 
@@ -103,11 +102,15 @@ So we drew a clear line. Our pod owned the global shell, routing, and permission
 - **Organize by task, not product:** Card sorting showed people group by what they’re doing, not where it lives. We rebuilt the sidebar around core workflows: 1:1s, feedback, engagement, reviews, and goals.
 - **Show each role only what it can use:** Our pod owned permissions, so we hid tools people couldn’t access, like analytics for non-admins.
 
-Another designer on our team did the visual design. I did the wireframes and IA, and we worked closely throughout.
+Another designer on our team led the final visual design while I focused on wireframes and IA.
 
 ### Making back mean back
 
-Back was the complaint I saw most. Across interviews and 50+ support tickets, people said the app dropped them in weird places, and our staff engineer confirmed it was a long-standing problem. Changing URLs was off the table, so the fix lived in the shared navigation layer our pod owned. It worked across every product, and every link admins had shared kept working.
+**Why it was a big problem:** Back was the complaint I saw most. Across 10+ interviews and 50+ support tickets, people said the app dropped them in weird places mid-workflow, and our staff engineers confirmed it was a long-known problem.
+
+**Why it was hard:** The fix had to work across every product at once, without changing a single URL. New URLs would have broken every link admins had shared in emails, Notion, Google Docs, Slack and Teams. So it lived in the shared navigation layer our pod owned.
+
+**Why it mattered:** Reviews, 1:1s and goals are the work people come to Lattice for. Getting dropped on Home in the middle of one meant finding your way back through the same cluttered sidebar we were already fixing.
 
 <figure>
   <img src="/work/lattice/08-browser-back-fix.webp" alt="Step 1: open a review from the Q3 2022 reviews list. Step 2: press the browser&#x27;s back button. Before the fix, back sent you to Home, mid-workflow. After the fix, back returns you to the reviews list where you left off." width="1920" height="1730" loading="lazy" decoding="async">
