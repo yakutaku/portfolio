@@ -276,6 +276,20 @@ const crumb = d.client.replace(/\s*\(.*\)$/, '');
     background: var(--fill);
     color: var(--text-weak);
   }
+  /* Research tables: scroll sideways on narrow screens rather than squeeze. */
+  .prose :global(.table-wrap) { margin: var(--l) 0; }
+  .prose :global(table) { width: 100%; min-width: 560px; border-collapse: collapse; font-size: var(--text-sm); line-height: var(--lh-sm); }
+  .prose :global(th), .prose :global(td) { padding: var(--s) var(--s) var(--s) 0; border-bottom: 1px solid var(--stroke-weak); text-align: left; vertical-align: top; }
+  .prose :global(thead th) { color: var(--text-weak); font-weight: 400; }
+  .prose :global(tbody th) { font-weight: 700; }
+  /* Phones: each row becomes a short stacked card (source, how much, finding). */
+  @media (max-width: 559px) {
+    .prose :global(table) { min-width: 0; }
+    .prose :global(thead) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .prose :global(tbody tr) { display: block; padding: var(--s) 0; border-bottom: 1px solid var(--stroke-weak); }
+    .prose :global(tbody th), .prose :global(tbody td) { display: block; padding: 0; border: 0; }
+    .prose :global(tbody td:nth-of-type(1)) { color: var(--text-weak); }
+  }
   /* A lead paragraph: a touch larger than body text, same weight, so it reads as the section's headline thought. */
   .prose :global(.lede) { font-size: var(--text-lg); line-height: var(--lh-lg); }
   /* Two images side by side (one column on phones). */

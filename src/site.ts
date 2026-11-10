@@ -51,5 +51,5 @@ export const site = {
 export const nav = [
   { href: '/', label: 'Work' },
   { href: '/about', label: 'About' },
-  { href: '/resume', label: 'Resume' },
+  { href: '/resume.pdf', label: 'Resume' },
 ] as const;
