@@ -28,7 +28,7 @@ tint: lilac
 
 ### Platforms: the kitchen sink of all companies
 
-Our pod (platform) owned the foundation every Lattice product sat on: navigation, site-wide IA, permissions, accessibility, internationalization, the mobile app, integrations, notifications, settings and admin, and Company Pages. Lattice had grown from a few products into an all-in-one HR platform, so every change we made touched nearly every product team.
+Our pod (platform) owned the foundation every Lattice product sat on. That meant navigation, site-wide IA, permissions, accessibility, internationalization, the mobile app, integrations, notifications, settings and admin, and Company Pages. Lattice had grown from a few products into an all-in-one HR platform, so every change we made touched nearly every product team.
 
 - **Navigation and site-wide IA:** this case study.
 - **Company Pages:** I redesigned it around celebrations, feedback and key links, and DAU/MAU grew 25%.

@@ -59,6 +59,7 @@ const isCurrent = (href: string) =>
     <footer class="container site-footer weak">
       <span>© {new Date().getFullYear()} {site.name}</span>
       <span>Designed and built by me with Claude Code. Astro, WebGPU, Web Audio, hosted on Vercel.</span>
+      <a class="footer-link" href="https://github.com/yakutaku/portfolio">View the code on GitHub</a>
     </footer>
     <Analytics />
   </body>
@@ -106,10 +107,12 @@ const isCurrent = (href: string) =>
     nav ul { margin: 0; gap: var(--xs); }
     nav a { padding: 0 var(--s); }
   }
+  .footer-link { display: inline-flex; align-items: center; min-height: var(--target); }
   .site-footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     gap: var(--xs) var(--m);
     padding-block: var(--l) var(--xl);
     border-top: 1px solid var(--stroke-weak);
