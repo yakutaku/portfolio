@@ -85,7 +85,7 @@ Every source kept surfacing the same three problems:
 
 Our team wanted a bigger redesign. Other product teams pushed back hard, because moving their products in the nav could hurt their own goals. Leadership pressure, limited resources, and tech debt ruled out a full rebuild.
 
-We also couldn’t change URLs. Admins linked Lattice pages in emails, Notion, Google Docs, Slack and Teams, and for most of them bookmarks were the navigation. New URLs would have broken all of those links and added complaints about something people already hated.
+We also couldn’t change URLs. Admins linked Lattice pages in emails, Notion, Google Docs, Slack, and Teams, and for most of them bookmarks were the navigation. New URLs would have broken all of those links and added complaints about something people already hated.
 
 So we drew a clear line. Our pod owned the global shell, routing, and permissions. Everything inside each product area stayed with its team. That kept the project shippable (and kept us out of endless stakeholder alignment meetings).
 
@@ -108,7 +108,7 @@ Another designer on our team led the final visual design while I focused on wire
 
 **Why it was a big problem:** Back was the complaint I saw most. Across 10+ interviews and 50+ support tickets, people said the app dropped them in weird places mid-workflow, and our staff engineers confirmed it was a long-known problem.
 
-**Why it was hard:** The fix had to work across every product at once, without changing a single URL. New URLs would have broken every link admins had shared in emails, Notion, Google Docs, Slack and Teams. So it lived in the shared navigation layer our pod owned.
+**Why it was hard:** The fix had to work across every product at once, without changing a single URL. New URLs would have broken every link admins had shared in emails, Notion, Google Docs, Slack, and Teams. So it lived in the shared navigation layer our pod owned.
 
 **Why it mattered:** Reviews, 1:1s and goals are the work people come to Lattice for. Getting dropped on Home in the middle of one meant finding your way back through the same cluttered sidebar we were already fixing.
 
