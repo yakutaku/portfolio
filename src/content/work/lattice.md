@@ -117,6 +117,22 @@ Another designer on our team led the final visual design while I focused on wire
   <figcaption>Back now returns people to where they were.</figcaption>
 </figure>
 
+## What we cut
+
+- **Grouping by product suite (performance, engagement, growth):** Tech debt made it hard, and card sorting already told us people think in tasks.
+- **Collapsible sections:** An extra click for power users on every visit, and not cheap to build.
+- **Pinned favorites:** Expensive (and bookmarks already did the job).
+
+## Impact
+
+### Navigation CSAT up 15%, reviews 20% faster
+
+In the first quarter after launch, Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
+
+The hypothesis held: we never rebuilt the platform, and people rated navigation 15% higher.
+
+## Epilogue
+
 ### Revisiting it in 2026
 
 <figure>
@@ -130,18 +146,6 @@ The selected state mattered more than it looked. In the 2022 nav, it was a sligh
   <img src="/work/lattice/05-ia-before-and-after.webp" alt="Map from the 2022 list of 13 nav items to the new structure: Everyone (Home, People), Workflows (1:1s, Feedback, Reviews, Goals, Engagement, Grow, Updates) and Admin (Reporting, Analytics, Directory, Settings), with Compensation added later in 2022." width="1440" height="1328" loading="lazy" decoding="async">
   <figcaption>The information architecture, before and after.</figcaption>
 </figure>
-
-## What we cut
-
-- **Grouping by product suite (performance, engagement, growth):** Tech debt made it hard, and card sorting already told us people think in tasks.
-- **Collapsible sections:** An extra click for power users on every visit, and not cheap to build.
-- **Pinned favorites:** Expensive (and bookmarks already did the job).
-
-## Impact
-
-### Navigation CSAT up 15%, reviews 20% faster
-
-In the first quarter after launch, Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
 
 ## Reflection
 

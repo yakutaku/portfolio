@@ -84,7 +84,7 @@ After launch, testers still found it too subtle on some tracks, even at 100. So 
 My first Figma pass didn't feel great to look at and lacked the visual texture I was aiming for, so I scrapped it and rebuilt from the ground up.
 
 <figure>
-  <img src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
+  <img style="max-width: 768px" src="/work/bigcity/05-first-pass.webp" alt="The first pass at the BigCity interface: a flat cream panel with a knob, a 50.0% readout, a dense pixel skyline and an FX on/bypass switch." width="768" height="416" loading="lazy" decoding="async">
   <figcaption>The first pass.</figcaption>
 </figure>
 
