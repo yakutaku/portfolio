@@ -163,7 +163,7 @@ Each step, in the order a new user sees it.
 
 We launched onboarding in March 2021. Of the customers who completed it, 16% upgraded to a paid plan (up from nearly zero). People who finish onboarding tend to be more motivated, so the new onboarding experience itself can't take credit for all of that lift. Average onboarding time also dropped by half, but the bigger shift was that sales started treating self-serve as its own channel.
 
-The hypothesis held on both counts: people who finished onboarding converted at 16%, and onboarding took half as long.
+Our bet held up: shorter, role-based onboarding got new teams up to speed twice as fast and turned more of them into paying customers.
 
 Okta acquired us in Q3 2021 for ~$79M, and their leadership called out our onboarding as especially strong compared to other SaaS products. Unfortunately, atSpoke was sunset a few months later.
 

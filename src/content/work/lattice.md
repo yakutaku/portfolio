@@ -129,7 +129,7 @@ Another designer on our team led the final visual design while I focused on wire
 
 In the first quarter after launch, Navigation CSAT, measured through an in-app survey, increased by 15%. Time to open a review decreased by 20%. Power users and prospects said getting around Lattice felt noticeably smoother.
 
-The hypothesis held: we never rebuilt the platform, and people rated navigation 15% higher.
+A cleaner sidebar, not a rebuild, was enough to make Lattice feel noticeably simpler to navigate.
 
 ## Epilogue
 
